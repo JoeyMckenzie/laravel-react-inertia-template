@@ -29,6 +29,10 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        if (is_null($request->user())) {
+            return Redirect::route('welcome');
+        }
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -53,7 +57,7 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        $user->delete();
+        $user?->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

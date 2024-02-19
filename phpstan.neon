@@ -1,0 +1,10 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+    level: max
+    paths:
+        - app/
+    ignoreErrors:
+        - '#Dynamic call to static method Illuminate\\Http\\Request::validate\(\).#'
