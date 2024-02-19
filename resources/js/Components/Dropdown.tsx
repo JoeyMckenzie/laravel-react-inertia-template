@@ -39,13 +39,16 @@ const Trigger = ({ children }: PropsWithChildren) => {
 
     return (
         <>
-            <div onClick={toggleOpen}>{children}</div>
+            <div onKeyUp={toggleOpen} onClick={() => {}}>
+                {children}
+            </div>
 
             {open && (
                 <div
                     className="fixed inset-0 z-40"
-                    onClick={() => setOpen(false)}
-                ></div>
+                    onKeyUp={() => setOpen(false)}
+                    onClick={() => {}}
+                />
             )}
         </>
     );
@@ -91,13 +94,11 @@ const Content = ({
             >
                 <div
                     className={`absolute z-50 mt-2 rounded-md shadow-lg ${alignmentClasses} ${widthClasses}`}
-                    onClick={() => setOpen(false)}
+                    onClick={() => {}}
+                    onKeyUp={() => setOpen(false)}
                 >
                     <div
-                        className={
-                            `rounded-md ring-1 ring-black ring-opacity-5 ` +
-                            contentClasses
-                        }
+                        className={`rounded-md ring-1 ring-black ring-opacity-5 ${contentClasses}`}
                     >
                         {children}
                     </div>
@@ -115,10 +116,7 @@ const DropdownLink = ({
     return (
         <Link
             {...props}
-            className={
-                "block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none " +
-                className
-            }
+            className={`block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-gray-100 focus:outline-none ${className}`}
         >
             {children}
         </Link>
