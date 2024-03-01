@@ -14,7 +14,7 @@ pail:
 
 # runs the ssr server
 ssr:
-    pnpm run build && php artisan inertia:start-ssr
+    rm -rf bootstrap/ssr/ && pnpm run build && php artisan inertia:start-ssr
 
 # check types on any file change
 lint:

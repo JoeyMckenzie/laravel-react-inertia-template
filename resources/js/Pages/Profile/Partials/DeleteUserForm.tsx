@@ -1,8 +1,8 @@
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
 import Modal from "@/Components/Modal";
-import TextInput from "@/Components/TextInput";
 import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef, useState } from "react";
 import { route } from "ziggy-js";
@@ -13,7 +13,7 @@ export default function DeleteUserForm({
     className?: string;
 }) {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef<HTMLInputElement>();
+    const passwordInput = useRef<HTMLInputElement>(null);
 
     const {
         data,
@@ -80,13 +80,11 @@ export default function DeleteUserForm({
                     </p>
 
                     <div className="mt-6">
-                        <InputLabel
-                            htmlFor="password"
-                            value="Password"
-                            className="sr-only"
-                        />
+                        <Label htmlFor="password" className="sr-only">
+                            Password
+                        </Label>
 
-                        <TextInput
+                        <Input
                             id="password"
                             type="password"
                             name="password"
@@ -96,7 +94,6 @@ export default function DeleteUserForm({
                                 setData("password", e.target.value)
                             }
                             className="mt-1 block w-full"
-                            isFocused
                             placeholder="Password"
                         />
 

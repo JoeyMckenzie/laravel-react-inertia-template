@@ -1,12 +1,14 @@
 import { PageProps } from "@/types";
 import { Head, Link } from "@inertiajs/react";
-import { route } from "ziggy-js";
+import { useRoute } from "../../../vendor/tightenco/ziggy/src/js";
 
 export default function Welcome({
     auth,
     laravelVersion,
     phpVersion,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
+    const route = useRoute();
+
     return (
         <>
             <Head title="Welcome" />

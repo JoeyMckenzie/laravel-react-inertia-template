@@ -1,7 +1,7 @@
 import InputError from "@/Components/InputError";
-import InputLabel from "@/Components/InputLabel";
-import TextInput from "@/Components/TextInput";
 import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Label } from "@/Components/ui/label";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler, useEffect } from "react";
@@ -39,9 +39,9 @@ export default function ResetPassword({
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <Label htmlFor="email">Email</Label>
 
-                    <TextInput
+                    <Input
                         id="email"
                         type="email"
                         name="email"
@@ -55,16 +55,15 @@ export default function ResetPassword({
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <Label htmlFor="password">Password</Label>
 
-                    <TextInput
+                    <Input
                         id="password"
                         type="password"
                         name="password"
                         value={data.password}
                         className="mt-1 block w-full"
                         autoComplete="new-password"
-                        isFocused={true}
                         onChange={(e) => setData("password", e.target.value)}
                     />
 
@@ -72,12 +71,11 @@ export default function ResetPassword({
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
+                    <Label htmlFor="password_confirmation">
+                        Confirm Password
+                    </Label>
 
-                    <TextInput
+                    <Input
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
