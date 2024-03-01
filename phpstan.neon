@@ -6,5 +6,8 @@ parameters:
     level: max
     paths:
         - app/
+        - routes/
+        - database/
     ignoreErrors:
         - '#Dynamic call to static method Illuminate\\Http\\Request::validate\(\).#'
+        - '#Dynamic call to static method Illuminate\\Console\\Scheduling\\Event::hourly\(\).#'
