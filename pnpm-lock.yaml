@@ -40,7 +40,7 @@ devDependencies:
     version: 1.6.7
   laravel-vite-plugin:
     specifier: ^1.0
-    version: 1.0.1(vite@5.0.12)
+    version: 1.0.2(vite@5.0.12)
   lint-staged:
     specifier: ^15.2.2
     version: 15.2.2
@@ -2047,8 +2047,8 @@ packages:
       json-buffer: 3.0.1
     dev: true
 
-  /laravel-vite-plugin@1.0.1(vite@5.0.12):
-    resolution: {integrity: sha512-laLEZUnSskIDZtLb2FNRdcjsRUhh1VOVvapbVGVTeaBPJTCF/b6gbPiX2dZdcH1RKoOE0an7L+2gnInk6K33Zw==}
+  /laravel-vite-plugin@1.0.2(vite@5.0.12):
+    resolution: {integrity: sha512-Mcclml10khYzBVxDwJro8wnVDwD4i7XOSEMACQNnarvTnHjrjXLLL+B/Snif2wYAyElsOqagJZ7VAinb/2vF5g==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
