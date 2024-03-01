@@ -39,15 +39,15 @@ const Trigger = ({ children }: PropsWithChildren) => {
 
     return (
         <>
-            <div onKeyUp={toggleOpen} onClick={() => {}}>
+            <div onClick={toggleOpen} onKeyDown={toggleOpen}>
                 {children}
             </div>
 
             {open && (
                 <div
                     className="fixed inset-0 z-40"
+                    onClick={() => setOpen(false)}
                     onKeyUp={() => setOpen(false)}
-                    onClick={() => {}}
                 />
             )}
         </>

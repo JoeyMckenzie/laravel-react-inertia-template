@@ -21,11 +21,12 @@ export default function Login({
         remember: false,
     });
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: only need to reset on page load
     useEffect(() => {
         return () => {
             reset("password");
         };
-    }, [reset]);
+    }, []);
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -102,7 +103,11 @@ export default function Login({
                         </Link>
                     )}
 
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton
+                        type="submit"
+                        className="ms-4"
+                        disabled={processing}
+                    >
                         Log in
                     </PrimaryButton>
                 </div>
