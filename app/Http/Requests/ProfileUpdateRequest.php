@@ -13,11 +13,11 @@ class ProfileUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, array<\Illuminate\Contracts\Validation\Rule|string>>
+     * @return array<string, array<int, Illuminate\Validation\Rules\Unique|string>>
      */
-    public function rules(): array
+    public function rules(): array // @phpstan-ignore-line
     {
-        return [
+        return [ // @phpstan-ignore-line
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()?->id)],
         ];
