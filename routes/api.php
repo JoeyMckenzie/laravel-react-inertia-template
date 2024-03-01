@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('hello', fn() => [
-    'hello' => 'world'
+Route::get('hello', fn (): array => [
+    'hello' => 'world',
 ]);

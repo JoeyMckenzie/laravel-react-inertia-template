@@ -50,7 +50,7 @@ class NewPasswordController extends Controller
         /** @var string $status */
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user) use ($request) {
+            function (User $user) use ($request): void {
                 /** @var string $password */
                 $password = $request->password ?? abort(401);
 
