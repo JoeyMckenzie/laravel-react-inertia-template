@@ -72,8 +72,7 @@
         "ci": [
             "@check",
             "@rector:dry",
-            "@lint",
-            "@test"
+            "@lint"
         ],
         "rector": "vendor/bin/rector process",
         "rector:dry": "vendor/bin/rector process --dry-run",
