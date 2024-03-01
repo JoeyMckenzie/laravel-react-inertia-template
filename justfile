@@ -15,3 +15,11 @@ pail:
 # runs the ssr server
 ssr:
     pnpm run build && php artisan inertia:start-ssr
+
+# check types on any file change
+lint:
+    find app/ tests/ | entr -s 'composer run lint'
+
+# run tests in parallel
+test:
+    find app/ tests/ | entr -s 'composer run test'
