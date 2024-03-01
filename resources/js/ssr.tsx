@@ -3,7 +3,7 @@ import createServer from "@inertiajs/react/server";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import ReactDOMServer from "react-dom/server";
 import { RouteName } from "ziggy-js";
-import route from "../../vendor/tightenco/ziggy/dist/index.m";
+import { route } from "../../vendor/tightenco/ziggy/dist/index.esm";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -18,6 +18,7 @@ createServer((page) =>
                 import.meta.glob("./Pages/**/*.tsx"),
             ),
         setup: ({ App, props }) => {
+            // @ts-expect-error idk, something ziggy handles
             global.route<RouteName> = (name, params, absolute) =>
                 route(name, params, absolute, {
                     // @ts-expect-error

@@ -6,6 +6,7 @@ import SecondaryButton from "@/Components/SecondaryButton";
 import TextInput from "@/Components/TextInput";
 import { useForm } from "@inertiajs/react";
 import { FormEventHandler, useRef, useState } from "react";
+import { route } from "ziggy-js";
 
 export default function DeleteUserForm({
     className = "",

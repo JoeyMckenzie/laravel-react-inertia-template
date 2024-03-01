@@ -2,6 +2,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { FormEventHandler } from "react";
+import { route } from "ziggy-js";
 
 export default function VerifyEmail({ status }: { status?: string }) {
     const { post, processing } = useForm({});

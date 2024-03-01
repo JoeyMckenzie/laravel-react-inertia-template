@@ -5,6 +5,7 @@ import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { FormEventHandler, useEffect } from "react";
+import { route } from "ziggy-js";
 
 export default function ResetPassword({
     token,
