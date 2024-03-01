@@ -1,7 +1,7 @@
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import { Button } from "@/Components/ui/button";
 import { PageProps } from "@/types";
 import { Transition } from "@headlessui/react";
 import { Link, useForm, usePage } from "@inertiajs/react";
@@ -100,9 +100,9 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton type="submit" disabled={processing}>
+                    <Button type="submit" disabled={processing}>
                         Save
-                    </PrimaryButton>
+                    </Button>
 
                     <Transition
                         show={recentlySuccessful}

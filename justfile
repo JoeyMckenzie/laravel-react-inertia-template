@@ -20,6 +20,10 @@ ssr:
 lint:
     find app/ tests/ | entr -s 'composer run lint'
 
+# check types on any file change
+lint-js:
+    find resources/ | entr -s 'pnpm run lint'
+
 # run tests in parallel
 test:
     find app/ tests/ | entr -s 'composer run test'
