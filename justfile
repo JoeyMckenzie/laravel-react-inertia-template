@@ -6,7 +6,11 @@ dev:
 
 # install dependencies for React and Laravel
 install:
-    rm -rf node_modules pnpm-lock.yaml && pnpm install & composer install
+    rm -rf node_modules pnpm-lock.yaml && pnpm install
+
+# refresh dependencies for React and Laravel
+refresh: install
+    rm -rf vendor composer.lock && composer install
 
 # runs tail logging
 pail:
