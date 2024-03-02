@@ -31,3 +31,7 @@ lint-js:
 # run tests in parallel
 test:
     find app/ tests/ | entr -s 'composer run test'
+
+# keep ourselves honest, practice safe CI
+ci:
+    pnpm run ci && composer run ci

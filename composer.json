@@ -74,6 +74,10 @@
             "@rector:dry",
             "@lint"
         ],
+        "ci:test": [
+            "@ci",
+            "@test"
+        ],
         "rector": "vendor/bin/rector process",
         "rector:dry": "vendor/bin/rector process --dry-run",
         "refactor": [
