@@ -56,8 +56,8 @@ devDependencies:
     specifier: ^0.5.7
     version: 0.5.7(tailwindcss@3.4.1)
   '@types/node':
-    specifier: ^18.19.21
-    version: 18.19.21
+    specifier: ^20.11.30
+    version: 20.11.30
   '@types/react':
     specifier: ^18.2.61
     version: 18.2.61
@@ -105,7 +105,7 @@ devDependencies:
     version: 5.3.3
   vite:
     specifier: ^5.1.4
-    version: 5.1.4(@types/node@18.19.21)
+    version: 5.1.4(@types/node@20.11.30)
 
 packages:
 
@@ -1536,8 +1536,8 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
-  /@types/node@18.19.21:
-    resolution: {integrity: sha512-2Q2NeB6BmiTFQi4DHBzncSoq/cJMLDdhPaAoJFnFCyD9a8VPZRf7a1GAwp1Edb7ROaZc5Jz/tnZyL6EsWMRaqw==}
+  /@types/node@20.11.30:
+    resolution: {integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
@@ -1711,7 +1711,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.24.0)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.1.4(@types/node@18.19.21)
+      vite: 5.1.4(@types/node@20.11.30)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2660,7 +2660,7 @@ packages:
       vite: ^5.0.0
     dependencies:
       picocolors: 1.0.0
-      vite: 5.1.4(@types/node@18.19.21)
+      vite: 5.1.4(@types/node@20.11.30)
       vite-plugin-full-reload: 1.1.0
     dev: true
 
@@ -3632,7 +3632,7 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /vite@5.1.4(@types/node@18.19.21):
+  /vite@5.1.4(@types/node@20.11.30):
     resolution: {integrity: sha512-n+MPqzq+d9nMVTKyewqw6kSt+R3CkvF9QAKY8obiQn8g1fwTscKxyfaYnC632HtBXAQGc1Yjomphwn1dtwGAHg==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -3660,7 +3660,7 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.19.21
+      '@types/node': 20.11.30
       esbuild: 0.19.12
       postcss: 8.4.35
       rollup: 4.12.0
