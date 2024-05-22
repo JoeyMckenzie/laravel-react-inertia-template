@@ -5,7 +5,8 @@
 	},
 	"files": {
 		"ignore": [
-			"./resources/js/ssr.tsx"
+			"./resources/js/ssr.tsx",
+			"./resources/js/components/ui/*.tsx"
 		]
 	},
 	"formatter": {
