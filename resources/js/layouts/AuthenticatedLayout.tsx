@@ -3,9 +3,7 @@ import NavLink from "@/components/NavLink";
 import ResponsiveNavLink from "@/components/ResponsiveNavLink";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import type { User } from "@/types";
-import { Link } from "@inertiajs/react";
-import { type PropsWithChildren, type ReactNode, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -15,7 +13,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+import type { User } from "@/types";
+import { Link } from "@inertiajs/react";
+import { type PropsWithChildren, type ReactNode, useState } from "react";
 
 export default function Authenticated({
     user,
