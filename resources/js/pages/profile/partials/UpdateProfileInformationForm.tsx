@@ -29,9 +29,7 @@ export default function UpdateProfileInformation({
     return (
         <section className={className}>
             <header>
-                <h2 className="font-medium text-gray-900 text-lg dark:text-neutral-200">
-                    Profile Information
-                </h2>
+                <h2 className="font-medium text-lg">Profile Information</h2>
 
                 <p className="mt-1 text-gray-600 text-sm dark:text-neutral-400">
                     Update your account's profile information and email address.
@@ -44,7 +42,7 @@ export default function UpdateProfileInformation({
 
                     <Input
                         id="name"
-                        className="mt-1 block w-full dark:text-white"
+                        className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData("name", e.target.value)}
                         required
@@ -60,7 +58,7 @@ export default function UpdateProfileInformation({
                     <Input
                         id="email"
                         type="email"
-                        className="mt-1 block w-full dark:text-white"
+                        className="mt-1 block w-full"
                         value={data.email}
                         onChange={(e) => setData("email", e.target.value)}
                         required
@@ -72,15 +70,17 @@ export default function UpdateProfileInformation({
 
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
-                        <p className="mt-2 text-gray-800 text-sm">
+                        <p className="mt-2 text-sm">
                             Your email address is unverified.
                             <Link
                                 href={route("verification.send")}
                                 method="post"
                                 as="button"
-                                className="rounded-md text-gray-600 text-sm underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
-                                Click here to re-send the verification email.
+                                <Button>
+                                    Click here to re-send the verification
+                                    email.
+                                </Button>
                             </Link>
                         </p>
 

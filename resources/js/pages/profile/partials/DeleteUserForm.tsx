@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "@inertiajs/react";
-import { type FormEventHandler, useRef, useState } from "react";
+import { type FormEventHandler, useRef } from "react";
 
 export default function DeleteUserForm({
     className = "",
@@ -42,8 +42,8 @@ export default function DeleteUserForm({
 
     return (
         <section className={`space-y-6${className}`}>
-            <header>
-                <h2 className="font-medium text-gray-900 text-lg dark:text-neutral-200">
+            <header className="mb-6">
+                <h2 className="font-medium text-lg dark:text-neutral-200">
                     Delete Account
                 </h2>
 

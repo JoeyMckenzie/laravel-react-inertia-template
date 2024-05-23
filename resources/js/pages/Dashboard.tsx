@@ -7,7 +7,7 @@ export default function Dashboard({ auth }: PageProps) {
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-gray-800 text-xl leading-tight dark:text-neutral-200">
+                <h2 className="font-semibold text-xl leading-tight">
                     Dashboard
                 </h2>
             }
@@ -16,10 +16,8 @@ export default function Dashboard({ auth }: PageProps) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl lg:px-8 sm:px-6">
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-black">
-                        <div className="p-6 text-gray-900 dark:text-neutral-200">
-                            You're logged in!
-                        </div>
+                    <div className="overflow-hidden bg-accent shadow-sm sm:rounded-lg">
+                        <div className="p-6">You're logged in!</div>
                     </div>
                 </div>
             </div>

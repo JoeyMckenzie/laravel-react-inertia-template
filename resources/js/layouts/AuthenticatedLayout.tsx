@@ -25,16 +25,20 @@ export default function Authenticated({
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
+    const dropdownEnabledCss = `${
+        showingNavigationDropdown ? "block" : "hidden"
+    } sm:hidden`;
+
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-            <div className="min-h-screen bg-gray-100 dark:bg-neutral-900">
-                <nav className="border-gray-100 border-b bg-white dark:border-neutral-900 dark:bg-black">
+            <div className="min-h-screen">
+                <nav className="border-gray-100 border-b dark:border-neutral-900">
                     <div className="mx-auto max-w-7xl px-4 lg:px-8 sm:px-6">
                         <div className="flex h-16 justify-between">
                             <div className="flex">
                                 <div className="flex shrink-0 items-center">
                                     <Link href="/">
-                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-neutral-200" />
+                                        <ApplicationLogo className="block h-9 w-auto fill-current" />
                                     </Link>
                                 </div>
 
@@ -53,10 +57,7 @@ export default function Authenticated({
                                 <div className="relative ms-3">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <Button
-                                                variant="ghost"
-                                                className="dark:text-neutral-200"
-                                            >
+                                            <Button variant="ghost">
                                                 {user.name}
                                                 <svg
                                                     className="-me-0.5 ms-2 h-4 w-4"
@@ -109,14 +110,14 @@ export default function Authenticated({
                             </div>
 
                             <div className="-me-2 flex items-center sm:hidden">
-                                <button
+                                <Button
+                                    variant="ghost"
                                     type="button"
                                     onClick={() =>
                                         setShowingNavigationDropdown(
                                             (previousState) => !previousState,
                                         )
                                     }
-                                    className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out focus:bg-gray-100 hover:bg-gray-100 focus:text-gray-500 hover:text-gray-500 focus:outline-none"
                                 >
                                     <svg
                                         className="h-6 w-6"
@@ -148,16 +149,12 @@ export default function Authenticated({
                                             d="M6 18L18 6M6 6l12 12"
                                         />
                                     </svg>
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>
 
-                    <div
-                        className={`${
-                            showingNavigationDropdown ? "block" : "hidden"
-                        }sm:hidden`}
-                    >
+                    <div className={dropdownEnabledCss}>
                         <div className="space-y-1 pt-2 pb-3">
                             <ResponsiveNavLink
                                 href={route("dashboard")}
@@ -167,12 +164,12 @@ export default function Authenticated({
                             </ResponsiveNavLink>
                         </div>
 
-                        <div className="border-gray-200 border-t pt-4 pb-1">
+                        <div className="border-t pt-4 pb-1">
                             <div className="px-4">
-                                <div className="font-medium text-base text-gray-800">
+                                <div className="font-medium text-base">
                                     {user.name}
                                 </div>
-                                <div className="font-medium text-gray-500 text-sm">
+                                <div className="font-medium text-sm">
                                     {user.email}
                                 </div>
                             </div>
@@ -194,7 +191,7 @@ export default function Authenticated({
                 </nav>
 
                 {header && (
-                    <header className="bg-white shadow dark:bg-black">
+                    <header className="shadow">
                         <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8 sm:px-6">
                             {header}
                         </div>
