@@ -44,9 +44,7 @@ export default function DeleteUserForm({
     return (
         <section className={clsx("space-y-6", className)}>
             <header className="mb-6">
-                <h2 className="font-medium text-lg dark:text-neutral-200">
-                    Delete Account
-                </h2>
+                <h2 className="font-medium text-lg">Delete Account</h2>
 
                 <p className="mt-1 text-gray-600 text-sm dark:text-neutral-400">
                     Once your account is deleted, all of its resources and data
@@ -86,7 +84,7 @@ export default function DeleteUserForm({
                             onChange={(e) =>
                                 setData("password", e.target.value)
                             }
-                            className="mt-1 block w-3/4"
+                            className="mt-1 block w-full"
                             placeholder="Password"
                         />
 
