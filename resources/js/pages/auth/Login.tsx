@@ -1,3 +1,4 @@
+import InputError from "@/components/InputError";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -71,6 +72,10 @@ export default function Login({
                                     setData("email", e.target.value)
                                 }
                             />
+                            <InputError
+                                message={errors.email}
+                                className="mt-2"
+                            />
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="password">Password</Label>
@@ -85,6 +90,10 @@ export default function Login({
                                 onChange={(e) =>
                                     setData("password", e.target.value)
                                 }
+                            />
+                            <InputError
+                                message={errors.password}
+                                className="mt-2"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-between">
