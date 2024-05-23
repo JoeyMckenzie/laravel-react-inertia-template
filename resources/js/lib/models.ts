@@ -22,8 +22,10 @@ export interface Link {
 
 export interface Todo {
     name: string;
-    status: string;
+    status: TodoStatus;
     title: string;
 }
+
+export type TodoStatus = "Done" | "In Progress" | "Cancelled" | "Not Started";
 
 export interface PaginatedTodos extends PaginatedModel<Todo> {}

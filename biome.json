@@ -3,19 +3,18 @@
     "organizeImports": {
         "enabled": true
     },
-    "files": {
-        "ignore": [
-            "./resources/js/ssr.tsx",
-            "./resources/js/components/ui/*.tsx"
-        ]
-    },
     "formatter": {
         "enabled": true,
         "indentWidth": 4,
-        "indentStyle": "space"
+        "indentStyle": "space",
+        "ignore": ["./resources/js/ssr.tsx"]
     },
     "linter": {
         "enabled": true,
+        "ignore": [
+            "./resources/js/ssr.tsx",
+            "./resources/js/components/ui/*.tsx"
+        ],
         "rules": {
             "recommended": true,
             "nursery": {

@@ -1,4 +1,3 @@
-import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,14 +16,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import {
     Pagination,
     PaginationContent,
     PaginationEllipsis,
@@ -33,8 +24,16 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
-import type { Todo, PaginatedModel } from "@/lib/models";
-import { Link } from "@inertiajs/react";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import type { PaginatedModel, Todo, TodoStatus } from "@/lib/models";
+import { MoreHorizontal } from "lucide-react";
 
 type BadgeVariant =
     | "default"
@@ -46,7 +45,7 @@ type BadgeVariant =
 
 function TodoTableRow(todo: Todo) {
     const { name, status, title } = todo;
-    const getStatusBadgeForStatus = (status: string): BadgeVariant => {
+    const getStatusBadgeForStatus = (status: TodoStatus): BadgeVariant => {
         switch (status) {
             case "Done":
                 return "default";
@@ -92,13 +91,22 @@ function TodoTableRow(todo: Todo) {
 }
 
 function TodoPagination(todos: PaginatedModel<Todo>) {
+    const previousPage = todos.current_page === 1 ? 1 : todos.current_page - 1;
+    const nextPage =
+        todos.current_page === todos.last_page
+            ? todos.last_page
+            : todos.current_page + 1;
+
     return (
         <Pagination>
             <PaginationContent>
                 <PaginationItem>
-                    <Link href={todos.prev_page_url ?? route("dashboard")}>
-                        <PaginationPrevious />
-                    </Link>
+                    <PaginationPrevious
+                        preserveScroll
+                        href={route("dashboard", {
+                            page: previousPage,
+                        })}
+                    />
                 </PaginationItem>
                 {todos.current_page - 2 > 0 && (
                     <PaginationItem>
@@ -107,42 +115,35 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                 )}
                 {todos.current_page - 1 > 0 && (
                     <PaginationItem>
-                        <Link
-                            href={
-                                todos.links[todos.current_page - 1].url ??
-                                route("dashboard")
-                            }
+                        <PaginationLink
+                            preserveScroll
+                            href={route("dashboard", {
+                                page: previousPage,
+                            })}
                         >
-                            <PaginationLink>
-                                {todos.current_page - 1}
-                            </PaginationLink>
-                        </Link>
+                            {previousPage}
+                        </PaginationLink>
                     </PaginationItem>
                 )}
                 <PaginationItem>
-                    <Link
-                        href={
-                            todos.links[todos.current_page].url ??
-                            route("dashboard")
-                        }
+                    <PaginationLink
+                        isActive
+                        preserveScroll
+                        href={route("dashboard", { page: todos.current_page })}
                     >
-                        <PaginationLink isActive>
-                            {todos.current_page}
-                        </PaginationLink>
-                    </Link>
+                        {todos.current_page}
+                    </PaginationLink>
                 </PaginationItem>
-                {todos.current_page + 1 < todos.last_page && (
+                {nextPage < todos.last_page && (
                     <PaginationItem>
-                        <Link
-                            href={
-                                todos.links[todos.current_page + 1].url ??
-                                route("dashboard")
-                            }
+                        <PaginationLink
+                            preserveScroll
+                            href={route("dashboard", {
+                                page: nextPage,
+                            })}
                         >
-                            <PaginationLink>
-                                {todos.current_page + 1}
-                            </PaginationLink>
-                        </Link>
+                            {nextPage}
+                        </PaginationLink>
                     </PaginationItem>
                 )}
                 {todos.current_page + 1 <= todos.last_page && (
@@ -151,9 +152,10 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                     </PaginationItem>
                 )}
                 <PaginationItem>
-                    <Link href={todos.next_page_url}>
-                        <PaginationNext />
-                    </Link>
+                    <PaginationNext
+                        preserveScroll
+                        href={route("dashboard", { page: nextPage })}
+                    />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>
