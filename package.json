@@ -7,7 +7,8 @@
         "fmt": "pnpm biome format --write ./resources/js",
         "lint": "pnpm biome lint --apply ./resources/js",
         "fix": "pnpm biome lint --apply-unsafe ./resources/js",
-        "check": "pnpm biome check --apply ./resources/js"
+        "check": "pnpm biome check --apply ./resources/js",
+        "ci": "pnpm run lint && pnpm run build"
     },
     "devDependencies": {
         "@biomejs/biome": "1.7.3",
