@@ -16,6 +16,7 @@ import {
 import type { User } from "@/types";
 import { Link } from "@inertiajs/react";
 import { clsx } from "clsx";
+import { CircleUser } from "lucide-react";
 import { type PropsWithChildren, type ReactNode, useState } from "react";
 
 export default function Authenticated({
@@ -56,19 +57,7 @@ export default function Authenticated({
                                         <DropdownMenuTrigger asChild>
                                             <Button variant="ghost">
                                                 {user.name}
-                                                <svg
-                                                    className="-me-0.5 ms-2 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <title>Logo</title>
-                                                    <path
-                                                        fillRule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clipRule="evenodd"
-                                                    />
-                                                </svg>
+                                                <CircleUser className="-me-0.5 ms-2 h-4 w-4" />
                                             </Button>
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent

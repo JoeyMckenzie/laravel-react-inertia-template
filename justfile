@@ -20,3 +20,6 @@ remigrate:
 
 ci:
     composer run check && pnpm run ci
+
+prepare:
+    git config core.hookspath .githooks
