@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Tests;
 
 test('All source files are strictly typed')
-  ->expect('App\\')
-  ->toUseStrictTypes();
+    ->expect('App\\')
+    ->toUseStrictTypes();
 
 test('All tests files are strictly typed')
-  ->expect('Tests\\')
-  ->toUseStrictTypes();
+    ->expect('Tests\\')
+    ->toUseStrictTypes();
