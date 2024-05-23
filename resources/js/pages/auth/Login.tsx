@@ -1,5 +1,12 @@
-import InputError from "@/components/InputError";
 import { Button } from "@/components/ui/button";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,67 +48,74 @@ export default function Login({
             )}
 
             <form onSubmit={submit}>
-                <div>
-                    <Label htmlFor="email">Email</Label>
-
-                    <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        onChange={(e) => setData("email", e.target.value)}
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <Label htmlFor="password">Password</Label>
-
-                    <Input
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData("password", e.target.value)}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4 block">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onCheckedChange={(checked) =>
-                                setData("remember", !!checked)
-                            }
-                        />
-                        <span className="ms-2 text-gray-600 text-sm">
-                            Remember me
-                        </span>
-                    </label>
-                </div>
-
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route("password.request")}
-                            className="rounded-md text-gray-600 text-sm underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <Button className="ms-4" disabled={processing}>
-                        Log in
-                    </Button>
-                </div>
+                <Card className="w-full max-w-sm">
+                    <CardHeader>
+                        <CardTitle className="text-2xl">Login</CardTitle>
+                        <CardDescription>
+                            Enter your email below to login to your account.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid gap-4">
+                        <div className="grid gap-2">
+                            <Label htmlFor="email">Email</Label>
+                            <Input
+                                id="email"
+                                type="email"
+                                placeholder="john.smith@example.com"
+                                required
+                                name="email"
+                                value={data.email}
+                                className="mt-1 block w-full"
+                                autoComplete="username"
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                required
+                                name="password"
+                                value={data.password}
+                                className="mt-1 block w-full"
+                                autoComplete="current-password"
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="flex flex-row items-center justify-between">
+                            <label className="flex items-center">
+                                <Checkbox
+                                    name="remember"
+                                    checked={data.remember}
+                                    onCheckedChange={(checked) =>
+                                        setData("remember", !!checked)
+                                    }
+                                />
+                                <span className="ms-2 text-sm">
+                                    Remember me
+                                </span>
+                            </label>
+                            {canResetPassword && (
+                                <Link
+                                    href={route("password.request")}
+                                    className="rounded-md text-sm underline focus:outline-none focus:ring-2 focus:ring-offset-2"
+                                >
+                                    Forgot your password?
+                                </Link>
+                            )}
+                        </div>
+                    </CardContent>
+                    <CardFooter>
+                        <Button className="w-full" disabled={processing}>
+                            Sign in
+                        </Button>
+                    </CardFooter>
+                </Card>
             </form>
         </GuestLayout>
     );
