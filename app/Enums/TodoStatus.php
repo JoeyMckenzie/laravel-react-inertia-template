@@ -6,13 +6,13 @@ namespace App\Enums;
 
 enum TodoStatus: string
 {
-    case NOT_STARTED = 'not_started';
+    case NOT_STARTED = 'Not Started';
 
-    case IN_PROGRESS = 'in_progress';
+    case IN_PROGRESS = 'In Progress';
 
-    case DONE = 'done';
+    case DONE = 'Done';
 
-    case CANCELLED = 'cancelled';
+    case CANCELLED = 'Cancelled';
 
     /**
      * @return string[]

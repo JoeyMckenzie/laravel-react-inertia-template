@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 final class TodoFactory extends Factory
 {
+    private static int $todo = 1;
+
     /**
      * Define the model's default state.
      *
@@ -22,8 +24,8 @@ final class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'TOOD-1',
-            'title' => fake()->text(),
+            'name' => 'TOOD-'.self::$todo++,
+            'title' => fake()->text(100),
             'status' => fake()->randomElement(TodoStatus::toArray()),
             'user_id' => User::first(['id'])?->id,
         ];
