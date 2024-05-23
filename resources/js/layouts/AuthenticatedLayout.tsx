@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import type { User } from "@/types";
 import { Link } from "@inertiajs/react";
+import { clsx } from "clsx";
 import { type PropsWithChildren, type ReactNode, useState } from "react";
 
 export default function Authenticated({
@@ -24,10 +25,6 @@ export default function Authenticated({
 }: PropsWithChildren<{ user: User; header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
-
-    const dropdownEnabledCss = `${
-        showingNavigationDropdown ? "block" : "hidden"
-    } sm:hidden`;
 
     return (
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -154,7 +151,12 @@ export default function Authenticated({
                         </div>
                     </div>
 
-                    <div className={dropdownEnabledCss}>
+                    <div
+                        className={clsx(
+                            showingNavigationDropdown ? "block" : "hidden",
+                            "sm:hidden",
+                        )}
+                    >
                         <div className="space-y-1 pt-2 pb-3">
                             <ResponsiveNavLink
                                 href={route("dashboard")}
