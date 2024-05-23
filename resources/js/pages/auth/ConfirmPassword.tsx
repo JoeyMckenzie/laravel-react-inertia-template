@@ -27,7 +27,7 @@ export default function ConfirmPassword() {
         <GuestLayout>
             <Head title="Confirm Password" />
 
-            <div className="mb-4 text-sm text-gray-600">
+            <div className="mb-4 text-gray-600 text-sm">
                 This is a secure area of the application. Please confirm your
                 password before continuing.
             </div>
@@ -48,7 +48,7 @@ export default function ConfirmPassword() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="flex items-center justify-end mt-4">
+                <div className="mt-4 flex items-center justify-end">
                     <Button className="ms-4" disabled={processing}>
                         Confirm
                     </Button>

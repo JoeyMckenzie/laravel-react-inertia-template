@@ -6,6 +6,7 @@
         "build": "tsc && vite build && vite build --ssr",
         "fmt": "pnpm biome format --write ./resources/js",
         "lint": "pnpm biome lint --apply ./resources/js",
+        "fix": "pnpm biome lint --apply-unsafe ./resources/js",
         "check": "pnpm biome check --apply ./resources/js"
     },
     "devDependencies": {
