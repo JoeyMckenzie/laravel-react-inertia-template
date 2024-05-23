@@ -24,7 +24,7 @@ final class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'TOOD-'.self::$todo++,
+            'name' => 'TODO-'.self::$todo++,
             'title' => fake()->text(100),
             'status' => fake()->randomElement(TodoStatus::toArray()),
             'user_id' => User::first(['id'])?->id,

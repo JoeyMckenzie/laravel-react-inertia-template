@@ -1,5 +1,5 @@
 import { MoreHorizontal } from "lucide-react";
-import { Badge, BadgeProps, badgeVariants } from "@/components/ui/badge";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -24,7 +24,17 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import type { Todo } from "@/types/models";
+import {
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+} from "@/components/ui/pagination";
+import type { Todo, PaginatedModel } from "@/lib/models";
+import { Link } from "@inertiajs/react";
 
 type BadgeVariant =
     | "default"
@@ -34,13 +44,8 @@ type BadgeVariant =
     | null
     | undefined;
 
-export default function Todos({
-    todos,
-    total,
-}: {
-    todos: Todo[];
-    total: number;
-}) {
+function TodoTableRow(todo: Todo) {
+    const { name, status, title } = todo;
     const getStatusBadgeForStatus = (status: string): BadgeVariant => {
         switch (status) {
             case "Done":
@@ -54,6 +59,112 @@ export default function Todos({
         }
     };
 
+    return (
+        <TableRow>
+            <TableCell className="font-medium">{name}</TableCell>
+            <TableCell>
+                <Badge variant={getStatusBadgeForStatus(status)}>
+                    {status}
+                </Badge>
+            </TableCell>
+            <TableCell className="truncate">{title}</TableCell>
+            <TableCell>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            aria-haspopup="true"
+                            size="icon"
+                            variant="ghost"
+                        >
+                            <MoreHorizontal className="h-4 w-4" />
+                            <span className="sr-only">Toggle menu</span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem>Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </TableCell>
+        </TableRow>
+    );
+}
+
+function TodoPagination(todos: PaginatedModel<Todo>) {
+    return (
+        <Pagination>
+            <PaginationContent>
+                <PaginationItem>
+                    <Link href={todos.prev_page_url ?? route("dashboard")}>
+                        <PaginationPrevious />
+                    </Link>
+                </PaginationItem>
+                {todos.current_page - 2 > 0 && (
+                    <PaginationItem>
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                )}
+                {todos.current_page - 1 > 0 && (
+                    <PaginationItem>
+                        <Link
+                            href={
+                                todos.links[todos.current_page - 1].url ??
+                                route("dashboard")
+                            }
+                        >
+                            <PaginationLink>
+                                {todos.current_page - 1}
+                            </PaginationLink>
+                        </Link>
+                    </PaginationItem>
+                )}
+                <PaginationItem>
+                    <Link
+                        href={
+                            todos.links[todos.current_page].url ??
+                            route("dashboard")
+                        }
+                    >
+                        <PaginationLink isActive>
+                            {todos.current_page}
+                        </PaginationLink>
+                    </Link>
+                </PaginationItem>
+                {todos.current_page + 1 < todos.last_page && (
+                    <PaginationItem>
+                        <Link
+                            href={
+                                todos.links[todos.current_page + 1].url ??
+                                route("dashboard")
+                            }
+                        >
+                            <PaginationLink>
+                                {todos.current_page + 1}
+                            </PaginationLink>
+                        </Link>
+                    </PaginationItem>
+                )}
+                {todos.current_page + 1 <= todos.last_page && (
+                    <PaginationItem>
+                        <PaginationEllipsis />
+                    </PaginationItem>
+                )}
+                <PaginationItem>
+                    <Link href={todos.next_page_url}>
+                        <PaginationNext />
+                    </Link>
+                </PaginationItem>
+            </PaginationContent>
+        </Pagination>
+    );
+}
+
+export default function Todos({
+    todos,
+}: {
+    todos: PaginatedModel<Todo>;
+}) {
     return (
         <Card>
             <CardHeader>
@@ -75,61 +186,20 @@ export default function Todos({
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {todos.map(({ name, status, title }) => {
-                            return (
-                                <TableRow key={`${name}-${status}`}>
-                                    <TableCell className="font-medium">
-                                        {name}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Badge
-                                            variant={getStatusBadgeForStatus(
-                                                status,
-                                            )}
-                                        >
-                                            {status}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell className="truncate">
-                                        {title}
-                                    </TableCell>
-                                    <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button
-                                                    aria-haspopup="true"
-                                                    size="icon"
-                                                    variant="ghost"
-                                                >
-                                                    <MoreHorizontal className="h-4 w-4" />
-                                                    <span className="sr-only">
-                                                        Toggle menu
-                                                    </span>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuLabel>
-                                                    Actions
-                                                </DropdownMenuLabel>
-                                                <DropdownMenuItem>
-                                                    Edit
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Delete
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            );
-                        })}
+                        {todos.data.map((todo) => (
+                            <TodoTableRow key={todo.name} {...todo} />
+                        ))}
                     </TableBody>
                 </Table>
             </CardContent>
-            <CardFooter>
+            <CardFooter className="flex flex-col gap-y-4">
+                <TodoPagination {...todos} />
                 <div className="text-muted-foreground text-xs">
-                    Showing <strong>1-10</strong> of <strong>{total}</strong>{" "}
-                    products
+                    Showing{" "}
+                    <strong>
+                        {todos.from}-{todos.to}
+                    </strong>{" "}
+                    of <strong>{todos.total}</strong> todos
                 </div>
             </CardFooter>
         </Card>

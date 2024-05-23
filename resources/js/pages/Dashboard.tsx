@@ -1,14 +1,13 @@
 import Todos from "@/components/Todos";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
+import type { PaginatedModel, Todo } from "@/lib/models";
 import type { PageProps } from "@/types";
-import type { Todo } from "@/types/models";
 import { Head } from "@inertiajs/react";
 
 export default function Dashboard({
     auth,
     todos,
-    total,
-}: PageProps<{ todos: Todo[]; total: number }>) {
+}: PageProps<{ todos: PaginatedModel<Todo>; total: number }>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -22,7 +21,7 @@ export default function Dashboard({
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl lg:px-8 sm:px-6">
-                    <Todos todos={todos} total={total} />
+                    <Todos todos={todos} />
                 </div>
             </div>
         </AuthenticatedLayout>

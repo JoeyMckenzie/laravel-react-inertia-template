@@ -26,6 +26,6 @@ final class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
-        Todo::factory(10)->create();
+        Todo::factory(100)->create();
     }
 }
