@@ -13,9 +13,9 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import type { User } from "@/types";
 import { Link } from "@inertiajs/react";
-import { clsx } from "clsx";
 import { CircleUser } from "lucide-react";
 import { type PropsWithChildren, type ReactNode, useState } from "react";
 
@@ -141,7 +141,7 @@ export default function Authenticated({
                     </div>
 
                     <div
-                        className={clsx(
+                        className={cn(
                             showingNavigationDropdown ? "block" : "hidden",
                             "sm:hidden",
                         )}

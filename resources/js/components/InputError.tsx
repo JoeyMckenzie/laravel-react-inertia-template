@@ -1,4 +1,4 @@
-import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 import type { HTMLAttributes } from "react";
 
 export default function InputError({
@@ -7,7 +7,7 @@ export default function InputError({
     ...props
 }: HTMLAttributes<HTMLParagraphElement> & { message?: string }) {
     return message ? (
-        <p {...props} className={clsx("text-red-600 text-sm", className)}>
+        <p {...props} className={cn("text-red-600 text-sm", className)}>
             {message}
         </p>
     ) : null;

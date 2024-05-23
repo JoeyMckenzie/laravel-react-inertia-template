@@ -1,5 +1,5 @@
+import { cn } from "@/lib/utils";
 import { type InertiaLinkProps, Link } from "@inertiajs/react";
-import { clsx } from "clsx";
 
 export default function ResponsiveNavLink({
     active = false,
@@ -10,7 +10,7 @@ export default function ResponsiveNavLink({
     return (
         <Link
             {...props}
-            className={clsx(
+            className={cn(
                 "flex w-full items-start border-l-4 py-2 ps-3 pe-4",
                 active
                     ? "bg-accent focus:border-indigo-700 focus:bg-indigo-100 focus:text-indigo-800"
