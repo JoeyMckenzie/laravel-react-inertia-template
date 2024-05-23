@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "@inertiajs/react";
+import { clsx } from "clsx";
 import { type FormEventHandler, useRef } from "react";
 
 export default function DeleteUserForm({
@@ -41,7 +42,7 @@ export default function DeleteUserForm({
     };
 
     return (
-        <section className={`space-y-6${className}`}>
+        <section className={clsx("space-y-6", className)}>
             <header className="mb-6">
                 <h2 className="font-medium text-lg dark:text-neutral-200">
                     Delete Account
