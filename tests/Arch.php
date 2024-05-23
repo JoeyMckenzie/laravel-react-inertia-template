@@ -11,3 +11,7 @@ test('All source files are strictly typed')
 test('All tests files are strictly typed')
     ->expect('Tests\\')
     ->toUseStrictTypes();
+
+test('All enums are string backed')
+    ->expect('App\\Enums')
+    ->toBeStringBackedEnums();
