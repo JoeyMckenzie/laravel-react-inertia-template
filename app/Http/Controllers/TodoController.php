@@ -11,6 +11,10 @@ final class TodoController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Dashboard');
+        $todos = auth()->user()?->todos()->get(['title', 'name', 'status']);
+
+        return Inertia::render('Dashboard', [
+            'todos' => $todos,
+        ]);
     }
 }

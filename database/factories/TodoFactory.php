@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Enums\TodoStatus;
+use App\Models\Todo;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Todo>
+ * @extends Factory<Todo>
  */
 final class TodoFactory extends Factory
 {
@@ -19,7 +22,10 @@ final class TodoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => 'TOOD-1',
+            'title' => fake()->text(),
+            'status' => fake()->randomElement(TodoStatus::toArray()),
+            'user_id' => User::first(['id'])?->id,
         ];
     }
 }
