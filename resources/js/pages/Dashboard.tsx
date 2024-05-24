@@ -1,4 +1,5 @@
-import Todos from "@/components/Todos";
+import { TodoStats } from "@/components/TodoStats";
+import { Todos } from "@/components/Todos";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
 import type { PaginatedModel, Todo } from "@/lib/models";
 import type { PageProps } from "@/types";
@@ -20,7 +21,12 @@ export default function Dashboard({
             <Head title="Dashboard" />
 
             <div className="py-12">
-                <div className="mx-auto max-w-7xl lg:px-8 sm:px-6">
+                <div className="mx-auto max-w-7xl px-2 lg:px-8 sm:px-6">
+                    <div className="mb-4 grid grid-cols-1 space-x-0 space-y-4 sm:grid-cols-3 sm:space-x-4 sm:space-y-0">
+                        <TodoStats />
+                        <TodoStats />
+                        <TodoStats />
+                    </div>
                     <Todos todos={todos} />
                 </div>
             </div>
