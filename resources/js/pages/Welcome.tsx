@@ -47,7 +47,7 @@ export default function Welcome({
                             <nav className="-mx-3 flex flex-1 justify-end">
                                 {auth.user ? (
                                     <Link
-                                        href={route("dashboard")}
+                                        href={route("todos.index")}
                                         className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition dark:hover:text-white/80 dark:text-white hover:text-black/70 focus:outline-none dark:focus-visible:ring-white focus-visible:ring-[#FF2D20]"
                                     >
                                         Dashboard

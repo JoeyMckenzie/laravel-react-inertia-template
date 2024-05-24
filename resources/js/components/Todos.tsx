@@ -33,6 +33,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import type { PaginatedModel, Todo, TodoStatus } from "@/lib/models";
+import { Link } from "@inertiajs/react";
 import { MoreHorizontal } from "lucide-react";
 
 type BadgeVariant =
@@ -45,6 +46,7 @@ type BadgeVariant =
 
 function TodoTableRow(todo: Todo) {
     const { name, status, title } = todo;
+
     const getStatusBadgeForStatus = (status: TodoStatus): BadgeVariant => {
         switch (status) {
             case "Done":
@@ -82,7 +84,15 @@ function TodoTableRow(todo: Todo) {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuItem>Edit</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
+                        <Link
+                            preserveScroll
+                            href={route("todos.destroy", todo.id)}
+                            method="delete"
+                            as="button"
+                            className="w-full"
+                        >
+                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                        </Link>
                     </DropdownMenuContent>
                 </DropdownMenu>
             </TableCell>
@@ -103,7 +113,7 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                 <PaginationItem>
                     <PaginationPrevious
                         preserveScroll
-                        href={route("dashboard", {
+                        href={route("todos.index", {
                             page: previousPage,
                         })}
                     />
@@ -117,7 +127,7 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                     <PaginationItem>
                         <PaginationLink
                             preserveScroll
-                            href={route("dashboard", {
+                            href={route("todos.index", {
                                 page: previousPage,
                             })}
                         >
@@ -129,7 +139,9 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                     <PaginationLink
                         isActive
                         preserveScroll
-                        href={route("dashboard", { page: todos.current_page })}
+                        href={route("todos.index", {
+                            page: todos.current_page,
+                        })}
                     >
                         {todos.current_page}
                     </PaginationLink>
@@ -138,7 +150,7 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                     <PaginationItem>
                         <PaginationLink
                             preserveScroll
-                            href={route("dashboard", {
+                            href={route("todos.index", {
                                 page: nextPage,
                             })}
                         >
@@ -154,7 +166,7 @@ function TodoPagination(todos: PaginatedModel<Todo>) {
                 <PaginationItem>
                     <PaginationNext
                         preserveScroll
-                        href={route("dashboard", { page: nextPage })}
+                        href={route("todos.index", { page: nextPage })}
                     />
                 </PaginationItem>
             </PaginationContent>

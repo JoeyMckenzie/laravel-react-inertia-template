@@ -5,7 +5,7 @@ export interface PaginatedModel<T> {
     from: number;
     last_page: number;
     last_page_url: string;
-    links: Link[];
+    links: PaginationLink[];
     next_page_url: string;
     path: string;
     per_page: number;
@@ -14,13 +14,14 @@ export interface PaginatedModel<T> {
     total: number;
 }
 
-export interface Link {
+export interface PaginationLink {
     url?: string;
     label: string;
     active: boolean;
 }
 
 export interface Todo {
+    id: number;
     name: string;
     status: TodoStatus;
     title: string;
