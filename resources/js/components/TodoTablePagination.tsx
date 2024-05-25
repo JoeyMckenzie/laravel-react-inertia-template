@@ -8,7 +8,6 @@ import {
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import type { PaginatedModel, Todo } from "@/lib/models";
-import type React from "react";
 
 export function TodoPagination(todos: PaginatedModel<Todo>) {
     const previousPage = todos.current_page === 1 ? 1 : todos.current_page - 1;
@@ -28,7 +27,7 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
                         })}
                     />
                 </PaginationItem>
-                <div className="hidden sm:block">
+                <div className="hidden sm:flex sm:flex-row">
                     {todos.current_page - 2 > 0 && (
                         <PaginationItem>
                             <PaginationEllipsis />

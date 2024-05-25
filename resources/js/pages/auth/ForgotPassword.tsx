@@ -66,10 +66,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     setData("email", e.target.value)
                                 }
                             />
-                            <InputError
-                                message={errors.email}
-                                className="mt-2"
-                            />
+                            <InputError message={errors.email} />
                         </div>
                     </CardContent>
                     <CardFooter>

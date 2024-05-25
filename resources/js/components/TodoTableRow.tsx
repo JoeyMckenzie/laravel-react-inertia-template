@@ -24,7 +24,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 type BadgeVariant =
     | "default"
@@ -70,9 +70,37 @@ function getStatusBadgeForStatus(status: TodoStatus): {
 }
 
 export function TodoTableRow(todo: Todo) {
-    const { name, status, title } = todo;
-    const [currentStatus, setCurrentStatus] = useState(status);
-    const statusBadge = getStatusBadgeForStatus(currentStatus);
+    const { name, status: currentStatus, title } = todo;
+
+    const getStatusBadgeForStatus = (): {
+        variant: BadgeVariant;
+        icon: (props: LucideProps) => React.JSX.Element;
+    } => {
+        switch (currentStatus) {
+            case "Done":
+                return {
+                    variant: "default",
+                    icon: (props: LucideProps) => <BadgeCheck {...props} />,
+                };
+            case "Cancelled":
+                return {
+                    variant: "destructive",
+                    icon: (props: LucideProps) => <Ban {...props} />,
+                };
+            case "In Progress":
+                return {
+                    variant: "outline",
+                    icon: (props: LucideProps) => <Sparkles {...props} />,
+                };
+            default:
+                return {
+                    variant: "secondary",
+                    icon: (props: LucideProps) => <CircleSlash {...props} />,
+                };
+        }
+    };
+
+    const statusBadge = getStatusBadgeForStatus();
 
     return (
         <TableRow>
@@ -99,26 +127,20 @@ export function TodoTableRow(todo: Todo) {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger>
-                                Set status
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuPortal>
-                                <DropdownMenuSubContent>
-                                    {statuses.map((status) => (
-                                        <DropdownMenuItem
-                                            key={`${status}-${todo.name}`}
-                                            onClick={() =>
-                                                setCurrentStatus(status)
-                                            }
-                                            disabled={currentStatus === status}
-                                        >
-                                            {status}
-                                        </DropdownMenuItem>
-                                    ))}
-                                </DropdownMenuSubContent>
-                            </DropdownMenuPortal>
-                        </DropdownMenuSub>
+                        <Link
+                            key={`${status}-${todo.name}`}
+                            preserveScroll
+                            href={route("todos.destroy", todo.id)}
+                            method="delete"
+                            as="button"
+                            className="w-full dark:text-red-500"
+                        >
+                            <DropdownMenuItem
+                                disabled={currentStatus === status}
+                            >
+                                {status}
+                            </DropdownMenuItem>
+                        </Link>
                         <Link
                             preserveScroll
                             href={route("todos.destroy", todo.id)}

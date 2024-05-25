@@ -61,10 +61,7 @@ export default function Register() {
                                     }
                                     required
                                 />
-                                <InputError
-                                    message={errors.name}
-                                    className="mt-2"
-                                />
+                                <InputError message={errors.name} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
@@ -81,10 +78,7 @@ export default function Register() {
                                     }
                                     required
                                 />
-                                <InputError
-                                    message={errors.email}
-                                    className="mt-2"
-                                />
+                                <InputError message={errors.email} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
@@ -100,10 +94,7 @@ export default function Register() {
                                     }
                                     required
                                 />
-                                <InputError
-                                    message={errors.password}
-                                    className="mt-2"
-                                />
+                                <InputError message={errors.password} />
                             </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="password_confirmation">
@@ -126,7 +117,6 @@ export default function Register() {
                                 />
                                 <InputError
                                     message={errors.password_confirmation}
-                                    className="mt-2"
                                 />
                             </div>
                             <Button
