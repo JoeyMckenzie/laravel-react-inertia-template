@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodeQuality\Rector\Class_\InlineConstructorDefaultToPropertyRector;
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\SetList;
@@ -23,6 +24,10 @@ return RectorConfig::configure()
         AddVoidReturnTypeWhereNoReturnRector::class,
         InlineConstructorDefaultToPropertyRector::class,
     ])
+    ->withCache(
+        cacheDirectory: '/tmp/rector',
+        cacheClass: FileCacheStorage::class
+    )
     ->withSets([
         SetList::CODE_QUALITY,
         SetList::DEAD_CODE,

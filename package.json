@@ -11,8 +11,8 @@
         "ci": "pnpm run lint && pnpm run build"
     },
     "lint-staged": {
-        "**/*.{js,ts,tsx}": "pnpm run fmt",
-        "**/*.php": "composer run fmt"
+        "**/*.{js,ts,tsx}": ["pnpm run fmt", "pnpm run lint"],
+        "**/*.php": ["composer run fmt", "composer run rector"]
     },
     "devDependencies": {
         "@biomejs/biome": "1.7.3",

@@ -5,11 +5,7 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuPortal,
     DropdownMenuSeparator,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow } from "@/components/ui/table";
@@ -24,7 +20,7 @@ import {
     Sparkles,
 } from "lucide-react";
 import type React from "react";
-import { useMemo, useState } from "react";
+import { useCallback } from "react";
 
 type BadgeVariant =
     | "default"
@@ -41,38 +37,10 @@ const statuses: TodoStatus[] = [
     "Cancelled",
 ];
 
-function getStatusBadgeForStatus(status: TodoStatus): {
-    variant: BadgeVariant;
-    icon: (props: LucideProps) => React.JSX.Element;
-} {
-    switch (status) {
-        case "Done":
-            return {
-                variant: "default",
-                icon: (props: LucideProps) => <BadgeCheck {...props} />,
-            };
-        case "Cancelled":
-            return {
-                variant: "destructive",
-                icon: (props: LucideProps) => <Ban {...props} />,
-            };
-        case "In Progress":
-            return {
-                variant: "outline",
-                icon: (props: LucideProps) => <Sparkles {...props} />,
-            };
-        default:
-            return {
-                variant: "secondary",
-                icon: (props: LucideProps) => <CircleSlash {...props} />,
-            };
-    }
-}
-
 export function TodoTableRow(todo: Todo) {
     const { name, status: currentStatus, title } = todo;
 
-    const getStatusBadgeForStatus = (): {
+    const getStatusBadgeForStatus = useCallback((): {
         variant: BadgeVariant;
         icon: (props: LucideProps) => React.JSX.Element;
     } => {
@@ -98,7 +66,7 @@ export function TodoTableRow(todo: Todo) {
                     icon: (props: LucideProps) => <CircleSlash {...props} />,
                 };
         }
-    };
+    }, [currentStatus]);
 
     const statusBadge = getStatusBadgeForStatus();
 
@@ -128,7 +96,7 @@ export function TodoTableRow(todo: Todo) {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <Link
-                            key={`${status}-${todo.name}`}
+                            key={`${currentStatus}-${todo.name}`}
                             preserveScroll
                             href={route("todos.destroy", todo.id)}
                             method="delete"
@@ -136,9 +104,9 @@ export function TodoTableRow(todo: Todo) {
                             className="w-full dark:text-red-500"
                         >
                             <DropdownMenuItem
-                                disabled={currentStatus === status}
+                                disabled={currentStatus === todo.status}
                             >
-                                {status}
+                                {currentStatus}
                             </DropdownMenuItem>
                         </Link>
                         <Link

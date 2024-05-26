@@ -1,5 +1,5 @@
 import { TodoStats } from "@/components/TodoStats";
-import { Todos } from "@/components/Todos";
+import { Todos } from "@/components/TodosTable";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
 import type { PaginatedModel, Todo } from "@/lib/models";
 import type { PageProps } from "@/types";

@@ -64,7 +64,9 @@
         "lint": "./vendor/bin/phpstan analyze",
         "fmt": "./vendor/bin/pint -vv",
         "rector": "vendor/bin/rector process",
-        "check": ["@lint", "@fmt", "@rector", "@test:types"]
+        "rector:cache": "php vendor/bin/rector process --dry-run --config=rector.php",
+        "check": ["@lint", "@fmt", "@test:types"],
+        "check:test": ["@check", "@test:integration"]
     },
     "extra": {
         "laravel": {
