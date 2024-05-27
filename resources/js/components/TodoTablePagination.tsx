@@ -1,13 +1,15 @@
 import {
     Pagination,
     PaginationContent,
-    PaginationEllipsis,
+    PaginationFirst,
     PaginationItem,
+    PaginationLast,
     PaginationLink,
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
 import type { PaginatedModel, Todo } from "@/lib/models";
+import React from "react";
 
 export function TodoPagination(todos: PaginatedModel<Todo>) {
     const previousPage = todos.current_page === 1 ? 1 : todos.current_page - 1;
@@ -15,25 +17,32 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
         todos.current_page === todos.last_page
             ? todos.last_page
             : todos.current_page + 1;
+    const nextPageAvailable = todos.current_page < todos.last_page;
+    const previousPageAvailable = todos.current_page > 1;
 
     return (
         <Pagination>
             <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious
+                <PaginationItem className="flex flex-row items-center">
+                    <PaginationFirst
+                        as="button"
                         preserveScroll
+                        disabled={!previousPageAvailable}
+                        href={route("todos.index", {
+                            page: 1,
+                        })}
+                    />
+                    <PaginationPrevious
+                        as="button"
+                        preserveScroll
+                        disabled={!previousPageAvailable}
                         href={route("todos.index", {
                             page: previousPage,
                         })}
                     />
                 </PaginationItem>
                 <div className="hidden sm:flex sm:flex-row">
-                    {todos.current_page - 2 > 0 && (
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                    )}
-                    {todos.current_page - 1 > 0 && (
+                    {previousPageAvailable && (
                         <PaginationItem>
                             <PaginationLink
                                 preserveScroll
@@ -56,7 +65,7 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
                             {todos.current_page}
                         </PaginationLink>
                     </PaginationItem>
-                    {nextPage < todos.last_page && (
+                    {nextPageAvailable && (
                         <PaginationItem>
                             <PaginationLink
                                 preserveScroll
@@ -68,16 +77,19 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
                             </PaginationLink>
                         </PaginationItem>
                     )}
-                    {todos.current_page + 1 <= todos.last_page && (
-                        <PaginationItem>
-                            <PaginationEllipsis />
-                        </PaginationItem>
-                    )}
                 </div>
                 <PaginationItem>
                     <PaginationNext
+                        as="button"
+                        disabled={!nextPageAvailable}
                         preserveScroll
                         href={route("todos.index", { page: nextPage })}
+                    />
+                    <PaginationLast
+                        as="button"
+                        disabled={!nextPageAvailable}
+                        preserveScroll
+                        href={route("todos.index", { page: todos.last_page })}
                     />
                 </PaginationItem>
             </PaginationContent>

@@ -9,7 +9,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TableCell, TableRow } from "@/components/ui/table";
-import type { Todo, TodoStatus } from "@/lib/models";
+import type { Todo } from "@/lib/models";
 import { Link } from "@inertiajs/react";
 import {
     BadgeCheck,
@@ -29,13 +29,6 @@ type BadgeVariant =
     | "secondary"
     | null
     | undefined;
-
-const statuses: TodoStatus[] = [
-    "Not Started",
-    "In Progress",
-    "Done",
-    "Cancelled",
-];
 
 export function TodoTableRow(todo: Todo) {
     const { name, status: currentStatus, title } = todo;

@@ -29,4 +29,4 @@ export interface Todo {
 
 export type TodoStatus = "Done" | "In Progress" | "Cancelled" | "Not Started";
 
-export interface PaginatedTodos extends PaginatedModel<Todo> {}
+export type PaginatedTodos = PaginatedModel<Todo>;
