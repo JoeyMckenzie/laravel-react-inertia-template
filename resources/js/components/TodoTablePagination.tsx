@@ -45,6 +45,7 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
                     {previousPageAvailable && (
                         <PaginationItem>
                             <PaginationLink
+                                className="text-neutral-500"
                                 preserveScroll
                                 href={route("todos.index", {
                                     page: previousPage,
@@ -69,6 +70,7 @@ export function TodoPagination(todos: PaginatedModel<Todo>) {
                         <PaginationItem>
                             <PaginationLink
                                 preserveScroll
+                                className="text-neutral-500"
                                 href={route("todos.index", {
                                     page: nextPage,
                                 })}

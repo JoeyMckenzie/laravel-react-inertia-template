@@ -15,3 +15,9 @@ test('All tests files are strictly typed')
 test('All enums are string backed')
     ->expect('App\\Enums')
     ->toBeStringBackedEnums();
+
+test('All value objects are immutable')
+    ->expect('App\\ValueObjects')
+    ->toBeReadonly()
+    ->and('App\\ValueObjects')
+    ->toBeFinal();

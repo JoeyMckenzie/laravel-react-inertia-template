@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\TodoStatus;
 use App\Models\Todo;
+use App\ValueObjects\TodoMetadata;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -34,10 +35,13 @@ final class TodoController extends Controller
 
     public function index(): Response
     {
-        $todos = auth()->user()?->todos()->paginate(10);
+        $paginatedTodos = auth()->user()?->todos()->paginate(10);
+        $allTodos = auth()->user()?->todos()->get();
+        $metadata = new TodoMetadata($allTodos);
 
         return Inertia::render('Dashboard', [
-            'todos' => $todos,
+            'todos' => $paginatedTodos,
+            'metadata' => $metadata,
         ]);
     }
 }

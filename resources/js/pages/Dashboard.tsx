@@ -1,4 +1,4 @@
-import { TodoStats } from "@/components/TodoStats";
+import { TodoStat } from "@/components/TodoStat";
 import { Todos } from "@/components/TodosTable";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
 import type { PaginatedModel, Todo } from "@/lib/models";
@@ -8,7 +8,12 @@ import { Head } from "@inertiajs/react";
 export default function Dashboard({
     auth,
     todos,
-}: PageProps<{ todos: PaginatedModel<Todo>; total: number }>) {
+    metadata,
+}: PageProps<{
+    todos: PaginatedModel<Todo>;
+    total: number;
+    metadata: { completed: number; inProgress: number; notStarted: number };
+}>) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -23,9 +28,15 @@ export default function Dashboard({
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-2 lg:px-8 sm:px-6">
                     <div className="mb-4 grid grid-cols-1 space-x-0 space-y-4 sm:grid-cols-3 sm:space-x-4 sm:space-y-0">
-                        <TodoStats />
-                        <TodoStats />
-                        <TodoStats />
+                        <TodoStat stat={metadata.completed} label="Done" />
+                        <TodoStat
+                            stat={metadata.inProgress}
+                            label="In Progress"
+                        />
+                        <TodoStat
+                            stat={metadata.notStarted}
+                            label="Not Started"
+                        />
                     </div>
                     <Todos todos={todos} />
                 </div>
