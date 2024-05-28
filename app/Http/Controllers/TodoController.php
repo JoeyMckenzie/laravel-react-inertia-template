@@ -15,6 +15,13 @@ use Inertia\Response;
 
 final class TodoController extends Controller
 {
+    public function show(Todo $todo): Response
+    {
+        return Inertia::render('todos/Edit', [
+            'todo' => $todo,
+        ]);
+    }
+
     public function destroy(Todo $todo): RedirectResponse
     {
         $todo->delete();

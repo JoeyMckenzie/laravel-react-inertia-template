@@ -89,25 +89,18 @@ export function TodoTableRow(todo: Todo) {
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <Link
-                            key={`${currentStatus}-${todo.name}`}
-                            preserveScroll
-                            href={route("todos.destroy", todo.id)}
-                            method="delete"
+                            href={route("todos.show", todo.id)}
                             as="button"
-                            className="w-full dark:text-red-500"
+                            className="w-full"
                         >
-                            <DropdownMenuItem
-                                disabled={currentStatus === todo.status}
-                            >
-                                {currentStatus}
-                            </DropdownMenuItem>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
                         </Link>
                         <Link
                             preserveScroll
                             href={route("todos.destroy", todo.id)}
                             method="delete"
                             as="button"
-                            className="w-full dark:text-red-500"
+                            className="w-full text-destructive"
                         >
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                         </Link>
