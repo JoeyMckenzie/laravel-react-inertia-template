@@ -1,19 +1,19 @@
-import InputError from "@/components/InputError";
-import { Button } from "@/components/ui/button";
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/catalyst/button";
+import { Checkbox, CheckboxField } from "@/components/catalyst/checkbox";
+import { Input } from "@/components/catalyst/input";
 import GuestLayout from "@/layouts/GuestLayout";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
+import {
+    Description,
+    Field,
+    FieldGroup,
+    Fieldset,
+    Label,
+} from "@/components/catalyst/fieldset";
 import { type FormEventHandler, useEffect } from "react";
+import { Text } from "@/components/catalyst/text";
+import { Link } from "@/components/catalyst/link";
+import { Heading } from "@/components/catalyst/heading";
 
 export default function Login({
     status,
@@ -48,16 +48,14 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit}>
-                <Card className="w-full max-w-sm">
-                    <CardHeader>
-                        <CardTitle className="text-2xl">Login</CardTitle>
-                        <CardDescription>
-                            Enter your email below to login to your account.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-4">
-                        <div className="grid gap-2">
+            <form onSubmit={submit} className="rounded-lg p-12 shadow-lg">
+                <Fieldset>
+                    <Heading>Login</Heading>
+                    <Text>
+                        Enter your email below to login to your account.
+                    </Text>
+                    <FieldGroup>
+                        <Field>
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
@@ -73,9 +71,13 @@ export default function Login({
                                     setData("email", e.target.value)
                                 }
                             />
-                            <InputError message={errors.email} />
-                        </div>
-                        <div className="grid gap-2">
+                            {errors.email && (
+                                <Description className="text-red-500">
+                                    {errors.email}
+                                </Description>
+                            )}
+                        </Field>
+                        <Field>
                             <Label htmlFor="password">Password</Label>
                             <Input
                                 id="password"
@@ -89,24 +91,24 @@ export default function Login({
                                     setData("password", e.target.value)
                                 }
                             />
-                            <InputError
-                                message={errors.password}
-                                className="mt-2"
-                            />
-                        </div>
-                        <div className="flex flex-row items-center justify-between">
-                            <label className="flex items-center">
+                            {errors.password && (
+                                <Description className="text-red-500">
+                                    {errors.password}
+                                </Description>
+                            )}
+                        </Field>
+                        <Field className="flex flex-row items-center justify-between">
+                            <CheckboxField>
                                 <Checkbox
                                     name="remember"
                                     checked={data.remember}
-                                    onCheckedChange={(checked) =>
-                                        setData("remember", !!checked)
+                                    onChange={(checked) =>
+                                        setData("remember", checked)
                                     }
                                 />
-                                <span className="ms-2 text-sm">
-                                    Remember me
-                                </span>
-                            </label>
+
+                                <Label>Remember me</Label>
+                            </CheckboxField>
                             {canResetPassword && (
                                 <Link
                                     href={route("password.request")}
@@ -115,14 +117,19 @@ export default function Login({
                                     Forgot your password?
                                 </Link>
                             )}
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button className="w-full" disabled={processing}>
-                            Sign in
-                        </Button>
-                    </CardFooter>
-                </Card>
+                        </Field>
+                        <Field>
+                            <Button
+                                className="w-full"
+                                disabled={processing}
+                                color="blue"
+                                type="submit"
+                            >
+                                Sign in
+                            </Button>
+                        </Field>
+                    </FieldGroup>
+                </Fieldset>
             </form>
         </GuestLayout>
     );

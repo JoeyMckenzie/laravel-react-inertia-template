@@ -1,10 +1,17 @@
-import InputError from "@/components/InputError";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/components/catalyst/button";
+import { Input } from "@/components/catalyst/input";
+import {
+    Description,
+    Field,
+    FieldGroup,
+    Fieldset,
+    Label,
+    Legend,
+} from "@/components/catalyst/fieldset";
 import { Transition } from "@headlessui/react";
 import { useForm } from "@inertiajs/react";
 import { type FormEventHandler, useRef } from "react";
+import { Text } from "@/components/catalyst/text";
 
 export default function UpdatePasswordForm({
     className = "",
@@ -48,88 +55,101 @@ export default function UpdatePasswordForm({
 
     return (
         <section className={className}>
-            <header>
-                <h2 className="font-medium text-lg">Update Password</h2>
-
-                <p className="mt-1 text-gray-600 text-sm dark:text-neutral-400">
-                    Ensure your account is using a long, random password to stay
-                    secure.
-                </p>
-            </header>
-
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                <div>
-                    <Label htmlFor="current_password">Current Password</Label>
+                <Fieldset>
+                    <Legend>Update Password</Legend>
+                    <Text>
+                        Ensure your account is using a long, random password to
+                        stay secure.
+                    </Text>
 
-                    <Input
-                        id="current_password"
-                        ref={currentPasswordInput}
-                        value={data.current_password}
-                        onChange={(e) =>
-                            setData("current_password", e.target.value)
-                        }
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                    />
+                    <FieldGroup>
+                        <Field>
+                            <Label htmlFor="current_password">
+                                Current Password
+                            </Label>
+                            <Input
+                                id="current_password"
+                                ref={currentPasswordInput}
+                                value={data.current_password}
+                                onChange={(e) =>
+                                    setData("current_password", e.target.value)
+                                }
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="current-password"
+                            />
+                            {errors.current_password && (
+                                <Description className="text-red-500">
+                                    {errors.current_password}
+                                </Description>
+                            )}
+                        </Field>
+                        <Field>
+                            <Label htmlFor="password">New Password</Label>
+                            <Input
+                                id="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                            />
+                            {errors.password && (
+                                <Description className="text-red-500">
+                                    {errors.password}
+                                </Description>
+                            )}
+                        </Field>
+                        <Field>
+                            <Label htmlFor="password_confirmation">
+                                Confirm Password
+                            </Label>
+                            <Input
+                                id="password_confirmation"
+                                value={data.password_confirmation}
+                                onChange={(e) =>
+                                    setData(
+                                        "password_confirmation",
+                                        e.target.value,
+                                    )
+                                }
+                                type="password"
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                            />
+                            {errors.password_confirmation && (
+                                <Description className="text-red-500">
+                                    {errors.password_confirmation}
+                                </Description>
+                            )}
+                        </Field>
+                        <Field className="flex items-center gap-4">
+                            <Button
+                                color="cyan"
+                                disabled={processing}
+                                type="submit"
+                            >
+                                Save
+                            </Button>
 
-                    <InputError
-                        message={errors.current_password}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div>
-                    <Label htmlFor="password">New Password</Label>
-
-                    <Input
-                        id="password"
-                        ref={passwordInput}
-                        value={data.password}
-                        onChange={(e) => setData("password", e.target.value)}
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div>
-                    <Label htmlFor="password_confirmation">
-                        Confirm Password
-                    </Label>
-
-                    <Input
-                        id="password_confirmation"
-                        value={data.password_confirmation}
-                        onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
-                        }
-                        type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
-                    />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div className="flex items-center gap-4">
-                    <Button disabled={processing}>Save</Button>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-gray-600 text-sm">Saved.</p>
-                    </Transition>
-                </div>
+                            <Transition
+                                show={recentlySuccessful}
+                                enter="transition ease-in-out"
+                                enterFrom="opacity-0"
+                                leave="transition ease-in-out"
+                                leaveTo="opacity-0"
+                            >
+                                <p className="text-gray-600 text-sm dark:text-neutral-400">
+                                    Saved.
+                                </p>
+                            </Transition>
+                        </Field>
+                    </FieldGroup>
+                </Fieldset>
             </form>
         </section>
     );

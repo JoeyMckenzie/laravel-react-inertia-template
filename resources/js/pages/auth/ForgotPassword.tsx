@@ -1,5 +1,5 @@
 import InputError from "@/components/InputError";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/catalyst/button";
 import {
     Card,
     CardContent,
@@ -8,11 +8,18 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/catalyst/input";
+import {
+    Field,
+    FieldGroup,
+    Fieldset,
+    Label,
+    Legend,
+} from "@/components/catalyst/fieldset";
 import GuestLayout from "@/layouts/GuestLayout";
 import { Head, useForm } from "@inertiajs/react";
 import type { FormEventHandler } from "react";
+import { Text } from "@/components/catalyst/text";
 
 export default function ForgotPassword({ status }: { status?: string }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -35,26 +42,19 @@ export default function ForgotPassword({ status }: { status?: string }) {
                 </div>
             )}
 
-            <form onSubmit={submit}>
-                <Card className="w-full max-w-sm">
-                    <CardHeader>
-                        <CardTitle className="text-2xl">
-                            Forgot password
-                        </CardTitle>
-                        <CardDescription>
-                            Forgot your password? No problem. Just let us know
-                            your email address and we will email you a password
-                            reset link that will allow you to choose a new one.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid gap-4">
-                        {status && (
-                            <div className="mb-4 font-medium text-sm">
-                                {status}
-                            </div>
-                        )}
-
-                        <div className="grid gap-2">
+            <form
+                onSubmit={submit}
+                className="w-full max-w-sm rounded-lg p-8 shadow-lg"
+            >
+                <Fieldset>
+                    <Legend>Forgot Password</Legend>
+                    <Text>
+                        Forgot your password? No problem. Just let us know your
+                        email address and we will email you a password reset
+                        link that will allow you to choose a new one.
+                    </Text>
+                    <FieldGroup>
+                        <Field>
                             <Label htmlFor="email">Email</Label>
                             <Input
                                 id="email"
@@ -66,19 +66,22 @@ export default function ForgotPassword({ status }: { status?: string }) {
                                     setData("email", e.target.value)
                                 }
                             />
-                            <InputError message={errors.email} />
-                        </div>
-                    </CardContent>
-                    <CardFooter>
-                        <Button
-                            type="submit"
-                            className="w-full"
-                            disabled={processing}
-                        >
-                            Email Password Reset Link
-                        </Button>
-                    </CardFooter>
-                </Card>
+                            <InputError
+                                className="mt-2"
+                                message={errors.email}
+                            />
+                        </Field>
+                        <Field>
+                            <Button
+                                type="submit"
+                                className="w-full"
+                                disabled={processing}
+                            >
+                                Email Password Reset Link
+                            </Button>
+                        </Field>
+                    </FieldGroup>
+                </Fieldset>
             </form>
         </GuestLayout>
     );

@@ -1,16 +1,6 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { TableCell, TableRow } from "@/components/ui/table";
+import { Badge, type badgeColors } from "@/components/catalyst/badge";
+import { TableCell, TableRow } from "@/components/catalyst/table";
 import type { Todo } from "@/lib/models";
-import { Link } from "@inertiajs/react";
 import { format } from "date-fns";
 import {
     BadgeCheck,
@@ -21,41 +11,42 @@ import {
     Sparkles,
 } from "lucide-react";
 import type React from "react";
-
-type BadgeVariant =
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | null
-    | undefined;
+import {
+    Dropdown,
+    DropdownButton,
+    DropdownDivider,
+    DropdownHeading,
+    DropdownItem,
+    DropdownMenu,
+    DropdownSection,
+} from "@/components/catalyst/dropdown";
 
 export function TodoTableRow(todo: Todo) {
     const { name, status: currentStatus, title } = todo;
 
     const getStatusBadgeForStatus = (): {
-        variant: BadgeVariant;
+        color: keyof typeof badgeColors;
         icon: (props: LucideProps) => React.JSX.Element;
     } => {
         switch (currentStatus) {
             case "Done":
                 return {
-                    variant: "default",
+                    color: "green",
                     icon: (props: LucideProps) => <BadgeCheck {...props} />,
                 };
             case "Overdue":
                 return {
-                    variant: "destructive",
+                    color: "orange",
                     icon: (props: LucideProps) => <CalendarClock {...props} />,
                 };
             case "In Progress":
                 return {
-                    variant: "outline",
+                    color: "blue",
                     icon: (props: LucideProps) => <Sparkles {...props} />,
                 };
             default:
                 return {
-                    variant: "secondary",
+                    color: "zinc",
                     icon: (props: LucideProps) => <CircleSlash {...props} />,
                 };
         }
@@ -68,7 +59,7 @@ export function TodoTableRow(todo: Todo) {
         <TableRow>
             <TableCell className="font-medium">{name}</TableCell>
             <TableCell>
-                <Badge variant={statusBadge.variant}>
+                <Badge color={statusBadge.color}>
                     <statusBadge.icon className="mr-2 h-4 w-4" />
                     {currentStatus}
                 </Badge>
@@ -76,38 +67,31 @@ export function TodoTableRow(todo: Todo) {
             <TableCell className="truncate">{title}</TableCell>
             <TableCell>{formattedDate}</TableCell>
             <TableCell>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button
-                            aria-haspopup="true"
-                            size="icon"
-                            variant="ghost"
-                        >
-                            <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <Link
-                            href={route("todos.show", todo.id)}
-                            as="button"
-                            className="w-full"
-                        >
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                        </Link>
-                        <Link
-                            preserveScroll
-                            href={route("todos.destroy", todo.id)}
-                            method="delete"
-                            as="button"
-                            className="w-full text-destructive"
-                        >
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
-                        </Link>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Dropdown>
+                    <DropdownButton>
+                        <MoreHorizontal className="h-4 w-4" />
+                    </DropdownButton>
+                    <DropdownMenu>
+                        <DropdownSection aria-label="My Account">
+                            <DropdownHeading>Actions</DropdownHeading>
+                            <DropdownItem
+                                href={route("todos.show", todo.id)}
+                                className="w-full"
+                            >
+                                Edit
+                            </DropdownItem>
+                            <DropdownItem
+                                preserveScroll
+                                href={route("todos.destroy", todo.id)}
+                                method="delete"
+                                as="button"
+                                color="red"
+                            >
+                                Delete
+                            </DropdownItem>
+                        </DropdownSection>
+                    </DropdownMenu>
+                </Dropdown>
             </TableCell>
         </TableRow>
     );

@@ -3,22 +3,23 @@ import NavLink from "@/components/NavLink";
 import ResponsiveNavLink from "@/components/ResponsiveNavLink";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { Button } from "@/components/ui/button";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/catalyst/button";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import type { User } from "@/types";
-import { Link } from "@inertiajs/react";
-import { CircleUser } from "lucide-react";
 import { type PropsWithChildren, type ReactNode, useState } from "react";
+import {
+    Dropdown,
+    DropdownButton,
+    DropdownItem,
+    DropdownMenu,
+} from "@/components/catalyst/dropdown";
+import { ChevronDownIcon } from "lucide-react";
+import {
+    DropdownSection,
+    DropdownHeading,
+} from "@/components/catalyst/dropdown";
+import { Link } from "@/components/catalyst/link";
 
 export default function Authenticated({
     user,
@@ -54,51 +55,37 @@ export default function Authenticated({
                             <div className="hidden sm:ms-6 sm:flex sm:items-center">
                                 <ThemeToggle />
                                 <div className="relative ms-3">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost">
-                                                {user.name}
-                                                <CircleUser className="-me-0.5 ms-2 h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent
-                                            className="w-56"
-                                            align="end"
-                                        >
-                                            <DropdownMenuLabel>
-                                                My Account
-                                            </DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuGroup>
-                                                <DropdownMenuItem>
-                                                    <Link
-                                                        className="w-full"
-                                                        href={route(
-                                                            "profile.edit",
-                                                        )}
-                                                    >
-                                                        Profile
-                                                    </Link>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    <Link
-                                                        className="w-full text-start"
-                                                        href={route("logout")}
-                                                        method="post"
-                                                        as="button"
-                                                    >
-                                                        Log Out
-                                                    </Link>
-                                                </DropdownMenuItem>
-                                            </DropdownMenuGroup>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
+                                    <Dropdown>
+                                        <DropdownButton outline>
+                                            {user.name}
+                                            <ChevronDownIcon className="size-4" />
+                                        </DropdownButton>
+                                        <DropdownMenu>
+                                            <DropdownSection aria-label="My Account">
+                                                <DropdownHeading>
+                                                    My Account
+                                                </DropdownHeading>
+                                                <DropdownItem
+                                                    className="w-full"
+                                                    href={route("profile.edit")}
+                                                >
+                                                    Profile
+                                                </DropdownItem>
+                                                <DropdownItem
+                                                    href={route("logout")}
+                                                    method="post"
+                                                    as="button"
+                                                >
+                                                    Log Out
+                                                </DropdownItem>
+                                            </DropdownSection>
+                                        </DropdownMenu>
+                                    </Dropdown>
                                 </div>
                             </div>
 
                             <div className="-me-2 flex items-center sm:hidden">
                                 <Button
-                                    variant="ghost"
                                     type="button"
                                     onClick={() =>
                                         setShowingNavigationDropdown(

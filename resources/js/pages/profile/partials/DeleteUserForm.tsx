@@ -1,25 +1,24 @@
 import InputError from "@/components/InputError";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/catalyst/button";
+import { Input } from "@/components/catalyst/input";
+import { Description, Field, Label } from "@/components/catalyst/fieldset";
 import {
     Dialog,
-    DialogClose,
-    DialogContent,
+    DialogActions,
+    DialogBody,
     DialogDescription,
-    DialogFooter,
-    DialogHeader,
     DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/catalyst/dialog";
 import { cn } from "@/lib/utils";
 import { useForm } from "@inertiajs/react";
-import { type FormEventHandler, useRef } from "react";
+import { type FormEventHandler, useRef, useState } from "react";
 
 export default function DeleteUserForm({
     className = "",
 }: { className?: string }) {
     const passwordInput = useRef<HTMLInputElement>(null);
+    const [open, setOpen] = useState(false);
+
     const {
         data,
         setData,
@@ -53,62 +52,60 @@ export default function DeleteUserForm({
                     retain.
                 </p>
             </header>
-            <Dialog>
-                <DialogTrigger asChild>
-                    <Button variant="destructive">Delete Account</Button>
-                </DialogTrigger>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle className="dark:text-neutral-200">
-                            Are you sure you want to delete your account?
-                        </DialogTitle>
-                        <DialogDescription>
-                            Once your account is deleted, all of its resources
-                            and data will be permanently deleted. Please enter
-                            your password to confirm you would like to
-                            permanently delete your account.
-                        </DialogDescription>
-                    </DialogHeader>
 
-                    <form onSubmit={deleteUser}>
-                        <Label htmlFor="password" className="sr-only">
-                            Password
-                        </Label>
+            <Button onClick={() => setOpen(true)} color="red">
+                Delete Account
+            </Button>
 
-                        <Input
-                            id="password"
-                            type="password"
-                            name="password"
-                            ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) =>
-                                setData("password", e.target.value)
-                            }
-                            className="mt-1 block w-full"
-                            placeholder="Password"
-                        />
-
-                        <InputError
-                            message={errors.password}
-                            className="mt-2"
-                        />
-
-                        <DialogFooter className="mt-6">
-                            <DialogClose asChild>
-                                <Button variant="secondary">Cancel</Button>
-                            </DialogClose>
-
-                            <Button
-                                type="submit"
-                                variant="destructive"
-                                className="ms-3"
-                                disabled={processing}
-                            >
-                                Delete Account
-                            </Button>
-                        </DialogFooter>
-                    </form>
-                </DialogContent>
+            <Dialog open={open} onClose={setOpen}>
+                <form onSubmit={deleteUser}>
+                    <DialogTitle>
+                        Are you sure you want to delete your account?
+                    </DialogTitle>
+                    <DialogDescription>
+                        Once your account is deleted, all of its resources and
+                        data will be permanently deleted. Please enter your
+                        password to confirm you would like to permanently delete
+                        your account.
+                    </DialogDescription>
+                    <DialogBody>
+                        <Field>
+                            <Label htmlFor="password" className="sr-only">
+                                Password
+                            </Label>
+                            <Input
+                                id="password"
+                                type="password"
+                                name="password"
+                                ref={passwordInput}
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                                className="mt-1 block w-full"
+                                placeholder="Password"
+                            />
+                            {errors.password && (
+                                <Description className="text-red-500">
+                                    {errors.password}
+                                </Description>
+                            )}
+                        </Field>
+                    </DialogBody>
+                    <DialogActions>
+                        <Button plain onClick={() => setOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button
+                            type="submit"
+                            color="red"
+                            className="ms-3"
+                            disabled={processing}
+                        >
+                            Delete Account
+                        </Button>
+                    </DialogActions>
+                </form>
             </Dialog>
         </section>
     );
