@@ -13,6 +13,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import type { User } from "@/types";
 import { Link } from "@inertiajs/react";
@@ -190,6 +191,7 @@ export default function Authenticated({
                 )}
 
                 <main>{children}</main>
+                <Toaster />
             </div>
         </ThemeProvider>
     );
