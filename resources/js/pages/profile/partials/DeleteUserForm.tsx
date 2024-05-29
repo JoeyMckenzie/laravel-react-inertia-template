@@ -1,4 +1,3 @@
-import InputError from "@/components/InputError";
 import { Button } from "@/components/catalyst/button";
 import { Input } from "@/components/catalyst/input";
 import { Description, Field, Label } from "@/components/catalyst/fieldset";
