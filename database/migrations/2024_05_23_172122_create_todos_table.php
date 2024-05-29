@@ -15,10 +15,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('todos', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table): void {
             $table->id();
             $table->string('name');
             $table->string('title');
+            $table->dateTime('due_by');
             $table->enum('status', TodoStatus::toArray());
             $table->foreignIdFor(User::class);
             $table->timestamps();

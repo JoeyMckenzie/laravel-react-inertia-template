@@ -6,7 +6,7 @@ import { Transition } from "@headlessui/react";
 import { useForm } from "@inertiajs/react";
 import { type FormEventHandler, useRef } from "react";
 
-export function UpdateTodoForm({ className = "" }: { className?: string }) {
+export function UpdateTodoForm() {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 

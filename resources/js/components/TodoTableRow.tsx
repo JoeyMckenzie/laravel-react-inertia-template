@@ -11,16 +11,16 @@ import {
 import { TableCell, TableRow } from "@/components/ui/table";
 import type { Todo } from "@/lib/models";
 import { Link } from "@inertiajs/react";
+import { format } from "date-fns";
 import {
     BadgeCheck,
-    Ban,
+    CalendarClock,
     CircleSlash,
     type LucideProps,
     MoreHorizontal,
     Sparkles,
 } from "lucide-react";
 import type React from "react";
-import { useCallback } from "react";
 
 type BadgeVariant =
     | "default"
@@ -33,7 +33,7 @@ type BadgeVariant =
 export function TodoTableRow(todo: Todo) {
     const { name, status: currentStatus, title } = todo;
 
-    const getStatusBadgeForStatus = useCallback((): {
+    const getStatusBadgeForStatus = (): {
         variant: BadgeVariant;
         icon: (props: LucideProps) => React.JSX.Element;
     } => {
@@ -43,10 +43,10 @@ export function TodoTableRow(todo: Todo) {
                     variant: "default",
                     icon: (props: LucideProps) => <BadgeCheck {...props} />,
                 };
-            case "Cancelled":
+            case "Overdue":
                 return {
                     variant: "destructive",
-                    icon: (props: LucideProps) => <Ban {...props} />,
+                    icon: (props: LucideProps) => <CalendarClock {...props} />,
                 };
             case "In Progress":
                 return {
@@ -59,9 +59,10 @@ export function TodoTableRow(todo: Todo) {
                     icon: (props: LucideProps) => <CircleSlash {...props} />,
                 };
         }
-    }, [currentStatus]);
+    };
 
     const statusBadge = getStatusBadgeForStatus();
+    const formattedDate = format(todo.due_by, "PP");
 
     return (
         <TableRow>
@@ -73,6 +74,7 @@ export function TodoTableRow(todo: Todo) {
                 </Badge>
             </TableCell>
             <TableCell className="truncate">{title}</TableCell>
+            <TableCell>{formattedDate}</TableCell>
             <TableCell>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>

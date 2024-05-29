@@ -18,12 +18,10 @@ export default function Dashboard({
         <AuthenticatedLayout
             user={auth.user}
             header={
-                <h2 className="font-semibold text-xl leading-tight">
-                    Dashboard
-                </h2>
+                <h2 className="font-semibold text-xl leading-tight">Todos</h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Todos" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl px-2 lg:px-8 sm:px-6">

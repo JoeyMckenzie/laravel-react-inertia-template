@@ -25,8 +25,9 @@ export interface Todo {
     name: string;
     status: TodoStatus;
     title: string;
+    due_by: string;
 }
 
-export type TodoStatus = "Done" | "In Progress" | "Cancelled" | "Not Started";
+export type TodoStatus = "Done" | "In Progress" | "Overdue" | "Not Started";
 
 export type PaginatedTodos = PaginatedModel<Todo>;

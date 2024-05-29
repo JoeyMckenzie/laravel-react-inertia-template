@@ -12,7 +12,7 @@ enum TodoStatus: string
 
     case DONE = 'Done';
 
-    case CANCELLED = 'Cancelled';
+    case OVERDUE = 'Overdue';
 
     /**
      * @return string[]

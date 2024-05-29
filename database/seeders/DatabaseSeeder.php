@@ -26,6 +26,12 @@ final class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
+        User::factory()->create([
+            'name' => 'test user 1',
+            'email' => 'testuser1@gmail.com',
+            'password' => Hash::make('password'),
+        ]);
+
         Todo::factory(100)->create();
     }
 }

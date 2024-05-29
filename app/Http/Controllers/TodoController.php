@@ -46,7 +46,7 @@ final class TodoController extends Controller
         $allTodos = auth()->user()?->todos()->get();
         $metadata = new TodoMetadata($allTodos);
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('todos/Index', [
             'todos' => $paginatedTodos,
             'metadata' => $metadata,
         ]);
