@@ -1,4 +1,12 @@
 import { Badge, type badgeColors } from "@/components/catalyst/badge";
+import {
+    Dropdown,
+    DropdownButton,
+    DropdownHeading,
+    DropdownItem,
+    DropdownMenu,
+    DropdownSection,
+} from "@/components/catalyst/dropdown";
 import { TableCell, TableRow } from "@/components/catalyst/table";
 import type { Todo } from "@/lib/models";
 import { format } from "date-fns";
@@ -11,15 +19,6 @@ import {
     Sparkles,
 } from "lucide-react";
 import type React from "react";
-import {
-    Dropdown,
-    DropdownButton,
-    DropdownDivider,
-    DropdownHeading,
-    DropdownItem,
-    DropdownMenu,
-    DropdownSection,
-} from "@/components/catalyst/dropdown";
 
 export function TodoTableRow(todo: Todo) {
     const { name, status: currentStatus, title } = todo;
@@ -60,7 +59,7 @@ export function TodoTableRow(todo: Todo) {
             <TableCell className="font-medium">{name}</TableCell>
             <TableCell>
                 <Badge color={statusBadge.color}>
-                    <statusBadge.icon className="mr-2 h-4 w-4" />
+                    <statusBadge.icon className="size-4" />
                     {currentStatus}
                 </Badge>
             </TableCell>
@@ -68,8 +67,8 @@ export function TodoTableRow(todo: Todo) {
             <TableCell>{formattedDate}</TableCell>
             <TableCell>
                 <Dropdown>
-                    <DropdownButton>
-                        <MoreHorizontal className="h-4 w-4" />
+                    <DropdownButton plain>
+                        <MoreHorizontal className="size-4" />
                     </DropdownButton>
                     <DropdownMenu>
                         <DropdownSection aria-label="My Account">

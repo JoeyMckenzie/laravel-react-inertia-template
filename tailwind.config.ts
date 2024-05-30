@@ -1,6 +1,6 @@
-import defaultTheme from "tailwindcss/defaultTheme";
 import forms from "@tailwindcss/forms";
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 export default {
     darkMode: ["class"],
@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ["Geist", ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
     },

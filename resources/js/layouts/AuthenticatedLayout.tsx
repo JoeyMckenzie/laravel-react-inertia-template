@@ -4,22 +4,21 @@ import ResponsiveNavLink from "@/components/ResponsiveNavLink";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/catalyst/button";
-import { Toaster } from "@/components/ui/toaster";
-import { cn } from "@/lib/utils";
-import type { User } from "@/types";
-import { type PropsWithChildren, type ReactNode, useState } from "react";
 import {
     Dropdown,
     DropdownButton,
+    DropdownHeading,
     DropdownItem,
     DropdownMenu,
-} from "@/components/catalyst/dropdown";
-import { ChevronDownIcon } from "lucide-react";
-import {
     DropdownSection,
-    DropdownHeading,
 } from "@/components/catalyst/dropdown";
+import { Heading } from "@/components/catalyst/heading";
 import { Link } from "@/components/catalyst/link";
+import { Toaster } from "@/components/ui/toaster";
+import { cn } from "@/lib/utils";
+import type { User } from "@/types";
+import { ChevronDownIcon } from "lucide-react";
+import { type PropsWithChildren, type ReactNode, useState } from "react";
 
 export default function Authenticated({
     user,
@@ -38,7 +37,7 @@ export default function Authenticated({
                             <div className="flex">
                                 <div className="flex shrink-0 items-center">
                                     <Link href="/">
-                                        <ApplicationLogo className="block h-9 w-auto fill-current" />
+                                        <ApplicationLogo className="block h-9 w-auto fill-current dark:text-white" />
                                     </Link>
                                 </div>
 
@@ -171,9 +170,12 @@ export default function Authenticated({
 
                 {header && (
                     <header className="shadow">
-                        <div className="mx-auto max-w-7xl px-4 py-6 lg:px-8 sm:px-6">
+                        <Heading
+                            level={1}
+                            className="mx-auto max-w-7xl px-4 py-6 lg:px-8 sm:px-6"
+                        >
                             {header}
-                        </div>
+                        </Heading>
                     </header>
                 )}
 

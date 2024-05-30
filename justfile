@@ -3,6 +3,11 @@ default: dev
 dev:
     php artisan serve & pnpm run dev
 
+install:
+    rm -rf node_modules/ pnpm-lock.yaml vendor/ composer.lock; \
+    pnpm install; \
+    composer install;
+
 ssr:
     find resources/ *.ts *.js | entr -s 'rm -rf bootstrap/ssr/ && pnpm run build && php artisan inertia:start-ssr'
 

@@ -1,24 +1,19 @@
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
+import { Heading } from "@/components/catalyst/heading";
+import { Text } from "@/components/catalyst/text";
 import type { TodoStatus } from "@/lib/models";
 
 export function TodoStat({ stat, label }: { stat: number; label: TodoStatus }) {
     return (
-        <Card>
-            <CardHeader className="pb-2">
-                <CardDescription>{label}</CardDescription>
-                <CardTitle className="text-4xl">{stat}</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <div className="text-muted-foreground text-xs">
+        <div className="rounded-xl border shadow dark:border-neutral-900">
+            <div className="flex flex-col space-y-1.5 p-6">
+                <Text className="text-muted-foreground text-sm">{label}</Text>
+                <Heading level={2}>{stat}</Heading>
+            </div>
+            <div className="p-6 pt-0">
+                <Text className="text-muted-foreground text-xs">
                     Todos this week
-                </div>
-            </CardContent>
-        </Card>
+                </Text>
+            </div>
+        </div>
     );
 }

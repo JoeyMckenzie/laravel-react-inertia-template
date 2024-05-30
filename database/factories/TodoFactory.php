@@ -34,7 +34,7 @@ final class TodoFactory extends Factory
 
         return [
             'name' => 'TODO-'.self::$todo++,
-            'title' => fake()->text(100),
+            'title' => fake()->text(60),
             'status' => $status,
             'due_by' => $dueBy,
             'user_id' => fake()->randomElement([$user1Id, $user2Id]),
