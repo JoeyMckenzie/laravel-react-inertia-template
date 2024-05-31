@@ -1,4 +1,6 @@
 import InputError from "@/components/InputError";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import {
     Card,
     CardContent,
@@ -6,9 +8,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/catalyst/card";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+} from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -64,15 +64,7 @@ export function TodosTable({
     const [createTodoModalOpen, setCreateTodoModalOpen] = useState(false);
     const { toast } = useToast();
 
-    const {
-        data,
-        setData,
-        post,
-        processing,
-        errors,
-        reset,
-        recentlySuccessful,
-    } = useForm<{
+    const { data, setData, post, processing, errors, reset } = useForm<{
         title: string;
         status: TodoStatus;
         due_by: Date;

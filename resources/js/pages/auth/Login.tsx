@@ -1,8 +1,5 @@
 import { Button } from "@/components/catalyst/button";
 import { Checkbox, CheckboxField } from "@/components/catalyst/checkbox";
-import { Input } from "@/components/catalyst/input";
-import GuestLayout from "@/layouts/GuestLayout";
-import { Head, useForm } from "@inertiajs/react";
 import {
     Description,
     Field,
@@ -10,10 +7,13 @@ import {
     Fieldset,
     Label,
 } from "@/components/catalyst/fieldset";
-import { type FormEventHandler, useEffect } from "react";
-import { Text } from "@/components/catalyst/text";
-import { Link } from "@/components/catalyst/link";
 import { Heading } from "@/components/catalyst/heading";
+import { Input } from "@/components/catalyst/input";
+import { Link } from "@/components/catalyst/link";
+import { Text } from "@/components/catalyst/text";
+import GuestLayout from "@/layouts/GuestLayout";
+import { Head, useForm } from "@inertiajs/react";
+import { type FormEventHandler, useEffect } from "react";
 
 export default function Login({
     status,
@@ -48,12 +48,14 @@ export default function Login({
                 </div>
             )}
 
-            <form onSubmit={submit} className="rounded-lg p-12 shadow-lg">
+            <form onSubmit={submit}>
                 <Fieldset>
-                    <Heading>Login</Heading>
-                    <Text>
-                        Enter your email below to login to your account.
-                    </Text>
+                    <div className="space-y-2 text-center">
+                        <Heading>Login</Heading>
+                        <Text>
+                            Enter your email below to login to your account.
+                        </Text>
+                    </div>
                     <FieldGroup>
                         <Field>
                             <Label htmlFor="email">Email</Label>
@@ -64,7 +66,7 @@ export default function Login({
                                 required
                                 name="email"
                                 value={data.email}
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 autoComplete="username"
                                 autoFocus
                                 onChange={(e) =>
@@ -85,7 +87,7 @@ export default function Login({
                                 required
                                 name="password"
                                 value={data.password}
-                                className="mt-1 block w-full"
+                                className="block w-full"
                                 autoComplete="current-password"
                                 onChange={(e) =>
                                     setData("password", e.target.value)
@@ -122,7 +124,7 @@ export default function Login({
                             <Button
                                 className="w-full"
                                 disabled={processing}
-                                color="blue"
+                                color="dark/zinc"
                                 type="submit"
                             >
                                 Sign in

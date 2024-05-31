@@ -1,5 +1,4 @@
 import { Button } from "@/components/catalyst/button";
-import { Input } from "@/components/catalyst/input";
 import {
     Description,
     Field,
@@ -8,12 +7,13 @@ import {
     Label,
     Legend,
 } from "@/components/catalyst/fieldset";
+import { Input } from "@/components/catalyst/input";
+import { Link } from "@/components/catalyst/link";
+import { Text } from "@/components/catalyst/text";
 import type { PageProps } from "@/types";
 import { Transition } from "@headlessui/react";
 import { useForm, usePage } from "@inertiajs/react";
 import type { FormEventHandler } from "react";
-import { Text } from "@/components/catalyst/text";
-import { Link } from "@/components/catalyst/link";
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,

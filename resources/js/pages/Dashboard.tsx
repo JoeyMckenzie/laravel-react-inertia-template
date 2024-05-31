@@ -1,7 +1,7 @@
-import { TodoStat } from "@/pages/todos/partials/TodoStat";
-import { TodosTable } from "@/pages/todos/partials/TodosTable";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout";
 import type { PaginatedModel, Todo } from "@/lib/models";
+import { TodoStat } from "@/pages/todos/partials/TodoStat";
+import { TodosTable } from "@/pages/todos/partials/TodosTable";
 import type { PageProps } from "@/types";
 import { Head } from "@inertiajs/react";
 

@@ -1,6 +1,4 @@
 import { Button } from "@/components/catalyst/button";
-import { Input } from "@/components/catalyst/input";
-import { Description, Field, Label } from "@/components/catalyst/fieldset";
 import {
     Dialog,
     DialogActions,
@@ -8,6 +6,8 @@ import {
     DialogDescription,
     DialogTitle,
 } from "@/components/catalyst/dialog";
+import { Description, Field, Label } from "@/components/catalyst/fieldset";
+import { Input } from "@/components/catalyst/input";
 import { cn } from "@/lib/utils";
 import { useForm } from "@inertiajs/react";
 import { type FormEventHandler, useRef, useState } from "react";

@@ -1,19 +1,18 @@
 import { Button } from "@/components/catalyst/button";
-import { Input } from "@/components/catalyst/input";
-import GuestLayout from "@/layouts/GuestLayout";
-import { Head, useForm } from "@inertiajs/react";
 import {
     Description,
     Field,
     FieldGroup,
     Fieldset,
     Label,
-    Legend,
 } from "@/components/catalyst/fieldset";
-import { type FormEventHandler, useEffect } from "react";
-import { Text } from "@/components/catalyst/text";
+import { Input } from "@/components/catalyst/input";
 import { Link } from "@/components/catalyst/link";
-import { Heading } from "lucide-react";
+import { Text } from "@/components/catalyst/text";
+import GuestLayout from "@/layouts/GuestLayout";
+import { Head, useForm } from "@inertiajs/react";
+import { Heading } from "@/components/catalyst/heading";
+import { type FormEventHandler, useEffect } from "react";
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -40,13 +39,15 @@ export default function Register() {
         <GuestLayout>
             <Head title="Register" />
 
-            <form onSubmit={submit} className="rounded-lg p-8 shadow-lg">
+            <form onSubmit={submit}>
                 <Fieldset>
-                    <Heading>Register</Heading>
-                    <Text>
-                        Enter your email and name below to sign up for an
-                        account
-                    </Text>
+                    <div className="space-y-2 text-center">
+                        <Heading>Register</Heading>
+                        <Text>
+                            Enter your email and name below to sign up for an
+                            account
+                        </Text>
+                    </div>
                     <FieldGroup>
                         <Field>
                             <Label htmlFor="name">Name</Label>

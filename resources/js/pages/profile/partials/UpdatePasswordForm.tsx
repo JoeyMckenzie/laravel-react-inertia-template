@@ -1,5 +1,4 @@
 import { Button } from "@/components/catalyst/button";
-import { Input } from "@/components/catalyst/input";
 import {
     Description,
     Field,
@@ -8,10 +7,11 @@ import {
     Label,
     Legend,
 } from "@/components/catalyst/fieldset";
+import { Input } from "@/components/catalyst/input";
+import { Text } from "@/components/catalyst/text";
 import { Transition } from "@headlessui/react";
 import { useForm } from "@inertiajs/react";
 import { type FormEventHandler, useRef } from "react";
-import { Text } from "@/components/catalyst/text";
 
 export default function UpdatePasswordForm({
     className = "",
