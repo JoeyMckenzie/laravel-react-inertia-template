@@ -1,5 +1,4 @@
-import { TodoPagination } from "@/pages/todos/partials/TodoTablePagination";
-import { TodoTableRow } from "@/pages/todos/partials/TodoTableRow";
+import InputError from "@/components/InputError";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -42,14 +41,15 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { useToast } from "@/components/ui/use-toast";
 import type { PaginatedModel, Todo, TodoStatus } from "@/lib/models";
 import { cn } from "@/lib/utils";
+import { TodoPagination } from "@/pages/todos/partials/TodoTablePagination";
+import { TodoTableRow } from "@/pages/todos/partials/TodoTableRow";
 import { useForm } from "@inertiajs/react";
 import { format } from "date-fns";
 import { CalendarIcon, CirclePlus } from "lucide-react";
-import { type FormEventHandler, useRef, useState, useEffect } from "react";
-import InputError from "@/components/InputError";
-import { useToast } from "@/components/ui/use-toast";
+import { type FormEventHandler, useEffect, useRef, useState } from "react";
 
 const selectableStatuses: TodoStatus[] = ["Not Started", "In Progress", "Done"];
 
