@@ -21,15 +21,14 @@ final class Todo extends Model
 
     public static function getNextName(): string
     {
-        // Extract the numeric part from the names and find the maximum value
+        /** @var int|null $maxNumber */
         $maxNumber = self::query()
             ->where('name', 'like', 'TODO-%')
             ->selectRaw('MAX(CAST(SUBSTRING(name, 6) AS UNSIGNED)) as max_number')
-            ->pluck('max_number')
-            ->first();
+            ->value('max_number');
 
         // Increment the maximum value by 1
-        $nextNumber = $maxNumber ? $maxNumber + 1 : 1;
+        $nextNumber = is_null($maxNumber) ? 1 : $maxNumber + 1;
 
         // Return the new name
         return 'TODO-'.$nextNumber;

@@ -27,12 +27,12 @@ final class TodoController extends Controller
         $validated = $request->validate([
             'title' => ['required'],
             'status' => ['required', Rule::enum(TodoStatus::class)],
-            'due_by' => ['required']
+            'due_by' => ['required'],
         ]);
 
         $nextTodo = Todo::getNextName();
         $todoProperties = array_merge([
-            'name' => $nextTodo
+            'name' => $nextTodo,
         ], $validated);
 
         auth()->user()?->todos()->create($todoProperties);
