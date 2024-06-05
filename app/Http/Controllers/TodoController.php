@@ -22,7 +22,7 @@ final class TodoController extends Controller
         ]);
     }
 
-    public function store(Request $request): Response
+    public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'title' => ['required'],
@@ -36,8 +36,12 @@ final class TodoController extends Controller
         ], $validated);
 
         auth()->user()?->todos()->create($todoProperties);
+        session()->flash('name', $nextTodo);
+        $todos = auth()->user()?->todos()->paginate(10);
 
-        return self::index();
+        return redirect()->route('todos.index', [
+            'page' => $todos?->lastPage() ?? 1,
+        ]);
     }
 
     public function destroy(Todo $todo): RedirectResponse
